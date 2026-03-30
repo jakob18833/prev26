@@ -1,0 +1,10 @@
+
+
+
+fun f(a:int, b:int):int=
+    a + b,
+    let var a:int var b:int in
+        a = 0,
+        b = 0,
+        a + b
+    end

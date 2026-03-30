@@ -1,0 +1,16 @@
+typ i = int
+typ c = char
+typ b = bool
+
+fun bb(b1:int, b2:int): b =
+    let
+        fun bbb(d1:i, d2:i) : i = d1 + d2
+    in
+        let fun aa() : c = 'a'
+            fun aaa(f:i) : i = 5 * 4 + 7 + 9 % 110
+        in
+            aaa(8) * bbb(2, 3)
+    end,
+    b1 >= b2
+   end
+

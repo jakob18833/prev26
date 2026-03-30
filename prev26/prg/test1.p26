@@ -1,0 +1,3 @@
+// cikel
+typ a = b
+typ b = a

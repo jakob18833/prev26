@@ -1,0 +1,3 @@
+// prekrivna funkcija
+fun abc(g: int): int = g
+fun abc(h: int, c:int): int = h + c

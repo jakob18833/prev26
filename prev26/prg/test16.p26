@@ -1,0 +1,11 @@
+var a: int
+var b: int
+fun main(): int =
+    a = 0,
+    b = 0,
+    while a < 100 do
+            while b < 100000 do
+                b = b + 2
+            end,
+            a = a + 1
+    end

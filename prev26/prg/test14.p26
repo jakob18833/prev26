@@ -1,0 +1,11 @@
+fun dec100(p:int):int =
+    while p > 0 do
+        p = p - 1
+    end,
+    let var a : int in
+        a = 1,
+        while a < 100 do
+            a = a + 1
+        end,
+        dec100(a)
+    end

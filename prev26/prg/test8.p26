@@ -1,0 +1,15 @@
+fun main():bool =
+    let
+        typ a=int
+        var c:a
+    in
+        c = 2,
+        c * c > c + c
+    end,
+    let
+        var c:b
+        typ b=int
+    in
+        c = 1,
+        c * c > c + c
+    end

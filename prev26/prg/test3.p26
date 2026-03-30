@@ -1,0 +1,6 @@
+// Slivnikov primer
+var i : int
+typ s = (i:int, j:int)
+typ s1 = s
+typ s2 = s1
+var a:s2

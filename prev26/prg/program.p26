@@ -1,0 +1,2 @@
+typ a = int
+fun b (a: int, b: int) : void = a + a

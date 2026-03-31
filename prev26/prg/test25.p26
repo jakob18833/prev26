@@ -1,0 +1,11 @@
+// ERROR: comparing pointers to different base types — ^int vs ^char are not equivalent
+var pi : ^int
+var pc : ^char
+
+fun main() : int =
+    let
+        var eq : bool
+    in
+        eq = pi == pc,
+        0
+    end

@@ -1,0 +1,12 @@
+// VALID: union field access via named type alias
+typ color = {r: int, g: int, b: int}
+
+fun main() : int =
+    let
+        var c : color
+        var val : int
+    in
+        c.r = 255,
+        val = c.r,
+        val
+    end

@@ -22,17 +22,17 @@ for test in $(ls test*.p26 | cut -d"t" -f3 | sort -n | sed 's/^/test/'); do
 
     make $prg_name TARGETPHASE=$compile_phase
 
+    echo "<h2> ${prg_name} </h2>" >> all.html
+    echo "<pre style=\"font-size: ${font_size}em;\"><code>" >> all.html
+    cat ${prg_name}.p26 >> all.html
+    echo "</code></pre>" >> all.html
     if [[ -f ${prg_name}-${compile_phase}.html ]]; then
-        echo "<h2> ${prg_name} </h2>" >> all.html
-        echo "<pre style=\"font-size: ${font_size}em;\"><code>" >> all.html
-        cat ${prg_name}.p26 >> all.html
-        echo "</code></pre>" >> all.html
         for phase in $log_phases; do
             cat ${prg_name}-${phase}.html >> all.html
         done
 
     else
-        echo "[ERROR]: Failed to compile ${prg_name}!"
+        echo "[ERROR]: Failed to compile ${prg_name}!" >> all.html
     fi
 done
 
@@ -41,17 +41,16 @@ for err in $(ls err*.p26 | cut -d"r" -f3 | sort -n | sed 's/^/err/'); do
     echo -e "\nCompiling test $prg_name\n"
     make $prg_name TARGETPHASE=$compile_phase
 
+    echo "<h2> ${prg_name} </h2>"
+    echo "<pre style=\"font-size: ${font_size}em;\"><code>" >> all.html
+    cat ${prg_name}.p26 >> all.html
+    echo "</code></pre>" >> all.html
     if [[ -f ${prg_name}-${compile_phase}.html ]]; then
-        echo "[ERROR]: Compiled ${prg_name}!"
-        echo "<h2> ${prg_name} </h2>"
-        echo "<pre style=\"font-size: ${font_size}em;\"><code>" >> all.html
-        cat ${prg_name}.p26 >> all.html
-        echo "</code></pre>" >> all.html
-        cat ${prg_name}.p26 >> all.html
         for phase in $log_phases; do
             cat ${prg_name}-${phase}.html >> all.html
         done
-
+    else 
+        echo "[ERROR]: Compiled ${prg_name}!"
     fi
 done
 

@@ -1,4 +1,4 @@
-fun main():bool =
+fun main():int =
     let
         typ a=int
         var c:a
@@ -11,5 +11,6 @@ fun main():bool =
         typ b=int
     in
         c = 1,
-        c * c > c + c
+        c * c > c + c,
+        1
     end

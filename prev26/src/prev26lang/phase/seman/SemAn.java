@@ -35,8 +35,7 @@ public class SemAn extends Phase {
 
 	/** Tester for nodes defining types. */
 	private static final Predicate<AST.Node> validForIsType = //
-			(AST.Node node) -> (node instanceof AST.Type) || //
-					((node instanceof AST.Defn) && ((node instanceof AST.TypDefn)) == true);
+			(AST.Node node) -> (node instanceof AST.Type) || (node instanceof AST.TypDefn);
 
 	/** Attribute specifying what type is defined by a node. */
 	public static final AST.Attribute<TYP.Type> isTypeAttr = new AST.Attribute<TYP.Type>(validForIsType);
@@ -46,7 +45,7 @@ public class SemAn extends Phase {
 	/** Tester for nodes that can be typed. */
 	private static final Predicate<AST.Node> validForOfType = //
 			(AST.Node node) -> (node instanceof AST.Expr) || //
-					((node instanceof AST.Defn) && ((node instanceof AST.TypDefn)) == false);
+					(node instanceof AST.Defn && !(node instanceof AST.TypDefn));
 
 	/** Attribute specifying what is a type of a node. */
 	public static final AST.Attribute<TYP.Type> ofTypeAttr = new AST.Attribute<TYP.Type>(validForOfType);
@@ -116,9 +115,9 @@ public class SemAn extends Phase {
 			}
 			if (validForIsType.test(node)) {
 				final TYP.Type type = isTypeAttr.get(node);
-                Report.info("descended into validForIsType");
+
 				if (type == null) {
-                    Report.info("Type is null!");
+//                    Report.info("!!!!!!Type is null!!!!!!");
 					if (Compiler.devMode()) {
 						xmlLogger.begElement("istype");
 						xmlLogger.addAttribute("none", "");
@@ -126,7 +125,6 @@ public class SemAn extends Phase {
 					} else
 						throw new Report.InternalError();
 				} else {
-                    Report.info("Type is not null!");
 					xmlLogger.begElement("istype");
 					type.accept(new TYP.Logger(xmlLogger), false);
 					xmlLogger.endElement();

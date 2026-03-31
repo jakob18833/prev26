@@ -1,3 +1,4 @@
 // cikel, ampak s kazalci
 typ t1 = (i:int, n: ^t2)
 typ t2 = (j:int, n: ^t1)
+fun main(): int

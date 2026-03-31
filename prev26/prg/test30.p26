@@ -1,0 +1,5 @@
+// ERROR: function body type does not match declared return type
+fun compute() : int =
+    true
+
+fun main() : int = 0

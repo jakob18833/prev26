@@ -1,155 +1,214 @@
 package prev26lang.phase.seman;
 
+import prev26lang.common.report.Report;
 import prev26lang.phase.abstr.AST;
+import prev26lang.phase.abstr.Abstr;
+
+import java.util.*;
+
+
 
 public class TypeConstructor implements AST.FullVisitor<Void, Void> {
+    AST.Visitor<TYP.Type, Void> typePreviewer = new TypePreviewer();
     @Override
     public Void visit(AST.Nodes<? extends AST.Node> nodes, Void arg) {
-        return AST.FullVisitor.super.visit(nodes, arg);
+
+        if (nodes.size() == 0) return null;
+
+        // AST root, let expression
+        if (nodes.first() instanceof AST.FullDefn) {
+            // first pass
+
+            for (AST.Node node : nodes) {
+                if (node instanceof AST.TypDefn typDefnNode) {
+                    TYP.NameType t = new TYP.NameType(typDefnNode.name);
+                    SemAn.isTypeAttr.put(node, t);
+                }
+            }
+
+            //second pass
+            for (AST.Node node: nodes) {
+                // we are interested just in typDefn nodes, not varDefn
+                if (node instanceof AST.TypDefn typDefnNode) {
+                    TYP.NameType t = (TYP.NameType) SemAn.isTypeAttr.get(node);
+
+                    // If the type defined in typDefnNode is NameType, we will walk NameType definitions to
+                    // the first non NameType. We detect cycles here.
+                    HashSet<AST.TypDefn> visited = new HashSet<>();
+                    AST.TypDefn helper = typDefnNode;
+                    while ( helper.type instanceof AST.NameType nameTypeHelper) {
+//                        Report.info("Currrently at typDefn " + helper.name + ", visited=" + visited);
+                        // get the definition
+                        AST.Defn nextHelper = SemAn.defAtAttr.get(nameTypeHelper);
+                        // if the definition statement is one of variable, parameter, or a function, we throw it.
+                        // Note that we can still use AST.FunType, but either case, it will be defined
+                        // inside a TypDefn node.
+                        if (! (nextHelper instanceof AST.TypDefn)) throw new Report.Error(typDefnNode, "Cannot define a type with a reference to variable!");
+                        // Check for cyclic types
+                        else if (visited.contains(nextHelper)) {
+                            throw new Report.Error(typDefnNode, "Cyclic type detected!");
+                        } else {
+
+                            visited.add((AST.TypDefn) nextHelper);
+                            helper = (AST.TypDefn) nextHelper;
+                        }
+                    }
+                    // Here we can assume helper is now a reference to a TypDefn, which contains type which is not NameType.
+                    // We store its placeholder type.
+                    TYP.Type placeholder = helper.type.accept(typePreviewer, null);
+//                    Report.info("Setting the actual type of " + t + " to " + placeholder);
+                    t.setActType(placeholder);
+                }
+            }
+            // third pass
+            for (AST.Node node : nodes) {
+                node.accept(this, arg);
+            }
+
+        } else {
+            for (AST.Node node: nodes) {
+                node.accept(this, arg);
+            }
+        }
+
+        return null;
+
     }
 
     @Override
     public Void visit(AST.TypDefn typDefn, Void arg) {
-        return AST.FullVisitor.super.visit(typDefn, arg);
+
+        typDefn.type.accept(this, arg);
+        // Get the NameType object we stored in the first pass and provide info about actual type
+        TYP.NameType typDefnType = (TYP.NameType) SemAn.isTypeAttr.get(typDefn);
+        TYP.Type actType = SemAn.isTypeAttr.get(typDefn.type);
+        typDefnType.setActType(actType);
+        return arg;
     }
 
-    @Override
-    public Void visit(AST.VarDefn varDefn, Void arg) {
-        return AST.FullVisitor.super.visit(varDefn, arg);
-    }
 
-    @Override
-    public Void visit(AST.DefFunDefn defFunDefn, Void arg) {
-        return AST.FullVisitor.super.visit(defFunDefn, arg);
-    }
+    // TYPES
 
-    @Override
-    public Void visit(AST.ExtFunDefn extFunDefn, Void arg) {
-        return AST.FullVisitor.super.visit(extFunDefn, arg);
-    }
-
-    @Override
-    public Void visit(AST.ParDefn parDefn, Void arg) {
-        return AST.FullVisitor.super.visit(parDefn, arg);
-    }
-
-    @Override
-    public Void visit(AST.CompDefn compDefn, Void arg) {
-        return AST.FullVisitor.super.visit(compDefn, arg);
-    }
 
     @Override
     public Void visit(AST.AtomType atomType, Void arg) {
-        return AST.FullVisitor.super.visit(atomType, arg);
-    }
+        switch (atomType.type) {
 
-    @Override
-    public Void visit(AST.ArrType arrType, Void arg) {
-        return AST.FullVisitor.super.visit(arrType, arg);
+            case AST.AtomType.Type.INT:
+                SemAn.isTypeAttr.put(atomType, TYP.IntType.type);
+                break;
+            case AST.AtomType.Type.BOOL:
+                SemAn.isTypeAttr.put(atomType, TYP.BoolType.type);
+                break;
+            case AST.AtomType.Type.CHAR:
+                SemAn.isTypeAttr.put(atomType, TYP.CharType.type);
+                break;
+            case AST.AtomType.Type.VOID:
+                SemAn.isTypeAttr.put(atomType, TYP.VoidType.type);
+        }
+        return null;
     }
 
     @Override
     public Void visit(AST.PtrType ptrType, Void arg) {
-        return AST.FullVisitor.super.visit(ptrType, arg);
+        ptrType.baseType.accept(this, arg);
+        TYP.Type baseType = SemAn.isTypeAttr.get(ptrType.baseType);
+        if (! TypeEquivalence.equivalent(baseType, TYP.VoidType.type)) {
+            SemAn.isTypeAttr.put(ptrType, new TYP.PtrType(baseType));
+        } else {
+            throw new Report.Error(ptrType, "Cannot have a pointer to Void!");
+        }
+        return null;
+    }
+
+    @Override
+    public Void visit(AST.ArrType arrType, Void arg) {
+        arrType.elemType.accept(this, arg);
+        TYP.Type elementType = SemAn.isTypeAttr.get(arrType.elemType);
+        long numElems;
+        try {
+            numElems = Long.parseLong(arrType.numElems);
+        } catch (NumberFormatException e) {
+            throw new Report.Error(Abstr.locAttr.get(arrType), "Array number of elements too large!");
+        }
+        if (0 < numElems && ! TypeEquivalence.equivalent(elementType, TYP.VoidType.type)) {
+            SemAn.isTypeAttr.put(arrType, new TYP.ArrType(elementType, numElems));
+        } else {
+            throw new Report.Error(arrType, "Illegal type for array or non positive number of elements!");
+        }
+        return null;
     }
 
     @Override
     public Void visit(AST.StrType strType, Void arg) {
-        return AST.FullVisitor.super.visit(strType, arg);
+        for (var component: strType.comps) component.type.accept(this, arg);
+        List<TYP.Type> compTypes = new ArrayList<>();
+        for (var node: strType.comps) {
+            TYP.Type compType = SemAn.isTypeAttr.get(node.type);
+            if (TypeEquivalence.equivalent(compType, TYP.VoidType.type)) {
+                throw new Report.Error(strType, "Struct type cannot contain components of type Void!");
+            }
+            compTypes.add(compType);
+        }
+        SemAn.isTypeAttr.put(strType, new TYP.StrType(compTypes));
+        return null;
     }
 
     @Override
     public Void visit(AST.UniType uniType, Void arg) {
-        return AST.FullVisitor.super.visit(uniType, arg);
+        for (var component: uniType.comps) component.type.accept(this, arg);
+        List<TYP.Type> compTypes = new ArrayList<>();
+        for (var component: uniType.comps) {
+            TYP.Type compType = SemAn.isTypeAttr.get(component.type);
+            if (TypeEquivalence.equivalent(compType, TYP.VoidType.type)) {
+                throw new Report.Error(uniType, "Struct type cannot contain components of type Void!");
+            }
+            compTypes.add(compType);
+        }
+        SemAn.isTypeAttr.put(uniType, new TYP.UniType(compTypes));
+        return null;
     }
 
     @Override
     public Void visit(AST.FunType funType, Void arg) {
-        return AST.FullVisitor.super.visit(funType, arg);
+        Set<Class<? extends TYP.Type>> allowedTypesPar = Set.of(TYP.IntType.class, TYP.CharType.class, TYP.BoolType.class, TYP.PtrType.class, TYP.FunType.class);
+        Set<Class<? extends TYP.Type>> allowedTypesReturn = Set.of(TYP.IntType.class, TYP.CharType.class, TYP.BoolType.class, TYP.VoidType.class, TYP.PtrType.class, TYP.FunType.class);
+        // accept children
+        funType.resType.accept(this, arg);
+        funType.parTypes.forEach(par -> par.accept(this, arg));
+
+        // store children's types
+        LinkedHashMap<AST.Type, TYP.Type> parTypes = new LinkedHashMap<>();
+        funType.parTypes.forEach(par -> parTypes.put(par, SemAn.isTypeAttr.get(par).actualType()));
+        TYP.Type resType = SemAn.isTypeAttr.get(funType.resType);
+
+        for (var entry: parTypes.entrySet()) {
+            Class<? extends TYP.Type> actualTypeClass = entry.getValue().actualType().getClass();
+            if (! allowedTypesPar.contains(actualTypeClass)) {
+                throw new Report.Error(Abstr.locAttr.get(entry.getKey()), "Illegal parameter type for FunType!");
+            }
+        }
+        if (! allowedTypesReturn.contains(resType.actualType().getClass())) {
+            throw new Report.Error(Abstr.locAttr.get(funType.resType), "Illegal return type for FunType!");
+        }
+        SemAn.isTypeAttr.put(funType, new TYP.FunType(parTypes.values().stream().toList(), resType));
+        return null;
     }
 
     @Override
     public Void visit(AST.NameType nameType, Void arg) {
-        return AST.FullVisitor.super.visit(nameType, arg);
+
+//        Report.info("Visiting nameType with name=" + nameType.name);
+//        Report.info(SemAn.isTypeAttr.get(nameType).toString());
+
+        // We get the node, where our nameType is defined. Because we
+        // never visit any AST.NameType nodes with variable definitions,
+        // we can cast the type.
+        AST.TypDefn typDefn = (AST.TypDefn) SemAn.defAtAttr.get(nameType);
+        SemAn.isTypeAttr.put(nameType, SemAn.isTypeAttr.get(typDefn));
+        return null;
     }
 
-    @Override
-    public Void visit(AST.ArrExpr arrExpr, Void arg) {
-        return AST.FullVisitor.super.visit(arrExpr, arg);
-    }
 
-    @Override
-    public Void visit(AST.AsgnExpr asgnExpr, Void arg) {
-        return AST.FullVisitor.super.visit(asgnExpr, arg);
-    }
 
-    @Override
-    public Void visit(AST.AtomExpr atomExpr, Void arg) {
-        return AST.FullVisitor.super.visit(atomExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.BinExpr binExpr, Void arg) {
-        return AST.FullVisitor.super.visit(binExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.CallExpr callExpr, Void arg) {
-        return AST.FullVisitor.super.visit(callExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.CastExpr castExpr, Void arg) {
-        return AST.FullVisitor.super.visit(castExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.CompExpr compExpr, Void arg) {
-        return AST.FullVisitor.super.visit(compExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.NameExpr nameExpr, Void arg) {
-        return AST.FullVisitor.super.visit(nameExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.PfxExpr pfxExpr, Void arg) {
-        return AST.FullVisitor.super.visit(pfxExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.SfxExpr sfxExpr, Void arg) {
-        return AST.FullVisitor.super.visit(sfxExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.SizeExpr sizeExpr, Void arg) {
-        return AST.FullVisitor.super.visit(sizeExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.Exprs exprs, Void arg) {
-        return AST.FullVisitor.super.visit(exprs, arg);
-    }
-
-    @Override
-    public Void visit(AST.IfThenExpr ifThenExpr, Void arg) {
-        return AST.FullVisitor.super.visit(ifThenExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.IfThenElseExpr ifThenElseExpr, Void arg) {
-        return AST.FullVisitor.super.visit(ifThenElseExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.WhileExpr whileExpr, Void arg) {
-        return AST.FullVisitor.super.visit(whileExpr, arg);
-    }
-
-    @Override
-    public Void visit(AST.LetExpr letExpr, Void arg) {
-        return AST.FullVisitor.super.visit(letExpr, arg);
-    }
 }

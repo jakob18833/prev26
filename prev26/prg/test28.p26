@@ -1,0 +1,4 @@
+// ERROR: array with void element type is not allowed
+var a : [5]void
+
+fun main() : int = 0

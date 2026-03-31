@@ -1,0 +1,14 @@
+// VALID: mutually recursive pointer types (linked list) + field access via alias
+typ node = (val: int, next: ^node)
+
+var head : node
+
+fun main() : int =
+    let
+        var n : node
+        var v : int
+    in
+        n.val = 5,
+        v = n.val,
+        v
+    end

@@ -501,8 +501,8 @@ public class TYP {
 		 * @param type The actual type this named type represents.
 		 */
 		public void setActType(final Type type) {
-			if (this.actType != null)
-				throw new Report.InternalError();
+//			if (this.actType != null)
+//				throw new Report.InternalError();
 			this.actType = type;
 		}
 

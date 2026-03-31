@@ -64,6 +64,10 @@
 		  </tr>
 		</xsl:if>
 		<xsl:apply-templates select="defat"/>
+		<xsl:apply-templates select="istype"/>
+		<xsl:apply-templates select="oftype"/>
+		<xsl:apply-templates select="isconst"/>
+		<xsl:apply-templates select="isaddr"/>
 	      </xsl:otherwise>
 	    </xsl:choose>
 	  </table>

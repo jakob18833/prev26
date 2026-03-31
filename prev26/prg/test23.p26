@@ -1,0 +1,12 @@
+// VALID: array indexing — result type is the element type, not the array type
+var arr : [5]int
+
+fun main() : int =
+    let
+        var val : int
+    in
+        arr[0] = 42,
+        arr[1] = 13,
+        val = arr[0] + arr[1],
+        val
+    end

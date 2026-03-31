@@ -1,0 +1,13 @@
+// VALID: comparing two pointers of the same base type
+var px : ^int
+var py : ^int
+
+fun main() : int =
+    let
+        var eq : bool
+        var ne : bool
+    in
+        eq = px == py,
+        ne = px != py,
+        0
+    end

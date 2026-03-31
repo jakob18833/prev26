@@ -90,8 +90,6 @@ public class NameResolver implements AST.FullVisitor<Void, Void> {
             for (AST.Node node : nodes) {
                 node.accept(this, arg);
             }
-        } else {
-            throw new Report.Error("We should not have any other types in node!");
         }
 
         return null;
@@ -179,6 +177,8 @@ public class NameResolver implements AST.FullVisitor<Void, Void> {
 //
 //    // ----- Expressions -----
 //
+
+
 
 
     @Override

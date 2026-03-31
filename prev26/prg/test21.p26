@@ -1,0 +1,4 @@
+typ a = int
+var b: a
+
+fun main(): int

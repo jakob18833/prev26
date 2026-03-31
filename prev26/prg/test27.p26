@@ -1,0 +1,4 @@
+// ERROR: pointer to void is not allowed
+var p : ^void
+
+fun main() : int = 0

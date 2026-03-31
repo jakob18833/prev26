@@ -163,7 +163,8 @@ public class Compiler {
                 try (SemAn seman = new SemAn()) {
                     (new NameResolver()).visit(Abstr.tree);
                     (new TypeConstructor()).visit(Abstr.tree);
-                    (new TypeChecker()).visit(Abstr.tree);
+                    TypeChecker typeChecker = new TypeChecker();
+                    Abstr.tree.accept(typeChecker, true);
                     SemAn.defAtAttr.lock();
                     SemAn.ofTypeAttr.lock();
                     SemAn.isTypeAttr.lock();
@@ -242,7 +243,7 @@ public class Compiler {
     }
 
     private static void scanCommandLine(final String[] cmdLineArgs) {
-        Report.info("cmdLineArgs: " + Arrays.toString(cmdLineArgs));
+//        Report.info("cmdLineArgs: " + Arrays.toString(cmdLineArgs));
         HashSet<String> usedCmdLineOpts = new HashSet<String>();
         for (int argc = 0; argc < cmdLineArgs.length; argc++) {
             if (cmdLineArgs[argc].startsWith("--")) {

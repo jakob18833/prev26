@@ -1,0 +1,11 @@
+// VALID: struct field access via named type alias (tests CompExpr NameType chain)
+typ point = (x: int, y: int)
+
+fun main() : int =
+    let
+        var p : point
+    in
+        p.x = 10,
+        p.y = 20,
+        p.x + p.y
+    end

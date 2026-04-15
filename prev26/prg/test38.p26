@@ -1,0 +1,13 @@
+// *, /, %, +, -
+
+typ ell = int
+typ sh = ell
+
+var a : int
+var b : int
+
+var c : sh
+var d: ell
+
+
+fun main():int=a * b , c/d, a%c, c+b, a-d, 300

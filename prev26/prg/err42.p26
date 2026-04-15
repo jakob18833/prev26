@@ -1,0 +1,11 @@
+typ a = int
+typ b = bool
+
+fun main():int =
+    let
+        var x : a
+        var y : b
+    in
+        x = y,
+        300
+    end

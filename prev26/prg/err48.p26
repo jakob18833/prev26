@@ -1,0 +1,5 @@
+typ shell2 = arrrrrrrray
+typ shell1 = [10]shell2
+typ arrrrrrrray = [300][200]shell1   // inf size
+
+fun main():int=let var x: arrrrrrrray in 1 end

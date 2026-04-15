@@ -1,0 +1,13 @@
+fun g(a:int, b:int, c:int, d:int):int = a + b + c + d
+
+fun f(x:int):int =
+    let
+        var tmp : int
+    in
+        tmp = g(x, x+1, x+2, x+3),
+        tmp
+    end
+
+fun main():int =
+    f(10),
+    300

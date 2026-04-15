@@ -1,0 +1,5 @@
+typ shell = void
+
+typ union = {ne:int, sme:int, biti:int, voidd:shell}
+
+fun main():int=300

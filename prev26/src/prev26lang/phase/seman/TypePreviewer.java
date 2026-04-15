@@ -42,8 +42,8 @@ public class TypePreviewer implements AST.Visitor<TYP.Type, Void> {
         return new TYP.FunType(new ArrayList<>(), placeholder);
     }
 
-//    @Override
-//    public TYP.Type visit(AST.NameType nameType, Void arg) {
-//        return new TYP.NameType("placeholder");
-//    }
+    @Override
+    public TYP.Type visit(AST.NameType nameType, Void arg) {
+        return new TYP.NameType("placeholder");
+    }
 }

@@ -3,6 +3,7 @@ package prev26lang.phase.abstr;
 import java.util.*;
 import java.util.function.*;
 
+import com.sun.jdi.Value;
 import prev26lang.*;
 import prev26lang.common.logger.*;
 import prev26lang.common.report.*;
@@ -1797,9 +1798,14 @@ public class AST {
 
 		/** Mapping of nodes to values. */
 		private final Vector<Value> mapping;
+		// this is not guaranteed to contain every value, since we
+		// are sometimes inserting duplicates. For example, we
+		// for every expression with OFTYPE=TYP.BoolType we override the
+		// previously stored one.
+        private final HashMap<Value, Node> reverseMap = new HashMap<>();
 
 		/** Checker for testing whether a node is a valid key. */
-		private Predicate<Node> keyChecker;
+		private final Predicate<Node> keyChecker;
 
 		/** A flag than makes this attribute immutable. */
 		private boolean locked;
@@ -1831,6 +1837,7 @@ public class AST {
 			while (id >= mapping.size())
 				mapping.setSize(id + 1000);
 			mapping.set(id, value);
+            reverseMap.put(value, node);
 			return value;
 		}
 
@@ -1848,6 +1855,9 @@ public class AST {
 				return null;
 			return mapping.get(id);
 		}
+        public Node reverseGet(Value value) {
+            return reverseMap.get(value);
+        }
 
 		/**
 		 * Makes this attribute immutable.
@@ -1857,6 +1867,8 @@ public class AST {
 		}
 
 	}
+
+
 
 	// ===== LOGGER =====
 

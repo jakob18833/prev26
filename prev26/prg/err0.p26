@@ -1,0 +1,1 @@
+fun main():int=let var b:[9223372036854775808]int in b[1] = 1 end, 1

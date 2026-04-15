@@ -1,3 +1,4 @@
-// dvojna uporaba istega imena
-typ a = int
-var a : int
+typ a = b
+typ b = a
+
+fun main():int=1

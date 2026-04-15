@@ -1,0 +1,9 @@
+typ ime = int
+
+typ kazalec1 = ^ime
+typ kazalec2 = ^ime
+
+var a:kazalec1
+var b:kazalec2
+
+fun main():int = a > b ,300

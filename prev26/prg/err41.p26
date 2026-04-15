@@ -1,0 +1,7 @@
+typ i = int
+typ b = bool
+
+fun f(x:i) : i =
+    x == 0
+
+fun main():int = 300

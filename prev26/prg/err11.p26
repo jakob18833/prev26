@@ -1,0 +1,11 @@
+
+typ shell = int
+
+
+fun main():int= let
+                    var a:[10]shell
+                    var b:[10]int
+                in
+                    a = b
+                end,
+                100

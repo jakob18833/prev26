@@ -1,4 +1,15 @@
-typ a = int
-var b: a
+typ shell2 = ^(komp1:^shell2, komp2:^shell2)
+typ shell1 = ^(komp1:^shell1, komp2:^shell2)
 
-fun main(): int
+
+fun main():int= let typ struktura=(komp1: shell1, komp2:shell2)
+                    typ se_ena=(komp1: ^(komp1:^shell1, komp2:^shell2), komp2: ^(komp1:^shell2, komp2:^shell2))
+                    var kazalec1:^struktura
+                    var kazalec2:^se_ena
+                in
+                    kazalec1 = nil as ^struktura,
+                    kazalec2 = kazalec1,
+                    kazalec1^.komp1^.komp2
+                end,
+
+                100

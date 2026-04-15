@@ -118,15 +118,15 @@ public class Report {
 	 * Thrown whenever the program.p26 encounters internal error.
 	 */
 	@SuppressWarnings("serial")
-	public static class InternalError extends Error {
+	public static class InternalError extends RuntimeException {
 
 		/**
 		 * Constructs a new internal compiler error.
 		 */
 		public InternalError() {
 			super("Internal error.");
-			if (Compiler.devMode())
-				this.printStackTrace();
+//			if (Compiler.devMode())
+//				this.printStackTrace();
 		}
 
 	}

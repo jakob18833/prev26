@@ -1,3 +1,2 @@
-// uporaba brez definicije
-fun func(a:int) : int =
-    b + 2
+
+fun main():int=let typ a = b typ b = a in 1 end, 1

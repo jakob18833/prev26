@@ -1,16 +1,5 @@
-fun main():int =
-    let
-        typ a=int
-        var c:a
-    in
-        c = 2,
-        c * c > c + c
-    end,
-    let
-        var c:b
-        typ b=int
-    in
-        c = 1,
-        c * c > c + c,
-        1
-    end
+fun a():int=b()-1
+fun b():int=a()-1
+
+
+fun main():int=1

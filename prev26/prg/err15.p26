@@ -1,0 +1,13 @@
+
+
+typ posreden = void
+var a : posreden
+
+
+
+
+
+
+
+
+fun main():int = 300

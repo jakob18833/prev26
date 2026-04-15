@@ -1,0 +1,4 @@
+typ shell = void
+typ arrrrrrrray = [300]shell
+
+fun main():int=300

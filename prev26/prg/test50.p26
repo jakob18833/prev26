@@ -1,0 +1,13 @@
+typ a = int
+typ b = int
+
+fun main():int =
+    let
+        var x : a
+        var y : b
+    in
+        x = 5,
+        y = x as b,
+        y
+    end,
+    300

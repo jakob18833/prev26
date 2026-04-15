@@ -1,0 +1,3 @@
+typ arrrrrrrray = [300]arrrrrrrray   // inf size
+
+fun main():int=let var x: arrrrrrrray in 1 end

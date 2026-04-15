@@ -1,0 +1,12 @@
+typ shell3 = void
+typ shell2 = ^^shell3
+typ shell = shell2
+typ ptr_na_void = ^shell
+
+
+fun main():int= let
+                    var a:ptr_na_void
+                in
+                    a^
+                end,
+                300

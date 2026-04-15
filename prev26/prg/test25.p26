@@ -1,11 +1,8 @@
-// ERROR: comparing pointers to different base types — ^int vs ^char are not equivalent
-var pi : ^int
-var pc : ^char
+typ shellc = char
+typ shell = (k1:int, k2:shellc)
+typ struktura = (k1: int, k2:char)
+typ se_ena = shell
 
-fun main() : int =
-    let
-        var eq : bool
-    in
-        eq = pi == pc,
-        0
-    end
+fun f(a:^se_ena):^struktura=a
+
+fun main():int=300

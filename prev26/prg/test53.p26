@@ -1,0 +1,19 @@
+var global : int
+
+fun outer(x:int):int =
+    let
+        var local : int
+    in
+        local = x + global,
+        let
+            var deep : int
+        in
+            deep = local * 2,
+            deep
+        end
+    end
+
+fun main():int =
+    global = 10,
+    outer(5),
+    300

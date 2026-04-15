@@ -1,0 +1,19 @@
+
+
+
+typ b1=bool
+typ b2=b1
+
+typ i1 = int
+typ i2=i1
+
+typ c1 = char
+typ c2 = c1
+
+fun line(p1:b1,p2:b2):bool= p1==p2, p1!=p2, p1<p2, p2>p1, p1<=p2, p1>=p2
+
+fun line2(p1:i1, p2:i2):bool=p1==p2, p1!=p2, p1<p2, p2>p1, p1<=p2, p1>=p2
+
+fun line3(p1:c1, p2:c2):bool=p1==p2, p1!=p2, p1<p2, p2>p1, p1<=p2, p1>=p2
+
+fun main():int = true>false, false <= false, false >= false,  300

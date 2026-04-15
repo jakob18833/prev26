@@ -1,0 +1,13 @@
+typ i = int
+typ fn2 = (:i,i:i)
+
+fun add(a:i, b:i):i = a + b
+
+fun main():int =
+    let
+        var f : fn2
+    in
+        f = add,
+        f(1)
+    end,
+    300

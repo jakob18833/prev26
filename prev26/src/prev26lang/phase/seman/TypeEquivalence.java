@@ -1,11 +1,38 @@
 package prev26lang.phase.seman;
 
-import prev26lang.common.report.Report;
-
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Set;
 
 public class TypeEquivalence {
+    public static boolean equivalentToVoid(TYP.Type type) {
+        return equivalent(type, TYP.VoidType.type, new HashMap<>());
+    }
+    public static boolean matchesGroup(TYP.Type type) {
+        Set<Class<?>> group = Set.of(
+                TYP.IntType.class,
+                TYP.CharType.class,
+                TYP.BoolType.class,
+                TYP.PtrType.class,
+                TYP.FunType.class
+        );
+        return group.stream().anyMatch(g -> type.actualType().getClass().equals(g));
+    }
+    public static boolean matchesGroupOrVoid(TYP.Type type) {
+        Set<Class<?>> group = Set.of(
+                TYP.IntType.class,
+                TYP.CharType.class,
+                TYP.BoolType.class,
+                TYP.PtrType.class,
+                TYP.FunType.class,
+                TYP.VoidType.class
+        );
+        return group.stream().anyMatch(g -> type.actualType().getClass().equals(g));
+    }
+    public static boolean matchesPtr(TYP.Type type) {
+        return type.actualType().getClass().equals(TYP.PtrType.class);
+    }
+
 
     public static boolean equivalent(TYP.Type t1, TYP.Type t2) {
         return equivalent(t1, t2, new HashMap<>());

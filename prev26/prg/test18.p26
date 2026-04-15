@@ -1,12 +1,14 @@
+typ shell2 = ^(komp1:^shell2, komp2:^shell2)
+typ shell1 = ^(komp1:^shell1, komp2:^shell2)
 
-var i: int
-var c: int
-fun main():void =
-    i = 0,
-    c = 345325,
-    while i < c do
-        if i % 2 == 0 then
-            c = c - 1
-        end,
-        i = i + 1
-    end
+
+fun main():int= let typ struktura=(komp1: shell1, komp2:shell2)
+                    typ se_ena=(komp1: ^(komp1:^shell1, komp2:^shell2), komp2: ^(komp1:^shell2, komp2:^shell2))
+                    var kazalec1:^struktura
+                    var kazalec2:^se_ena
+                in
+                    kazalec1 = nil as ^struktura,
+                    kazalec2 = kazalec1
+                end,
+
+                100

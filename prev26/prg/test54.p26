@@ -1,0 +1,6 @@
+typ a = ^a        // ptr breaks chain
+typ b = (::b)     // fun breaks chain
+typ c = [10]^c    // ptr inside array breaks chain
+
+
+fun main():int=1

@@ -1,0 +1,10 @@
+// arr, str, uni
+
+typ shell = void
+
+
+fun funny(a:shell):int
+
+
+
+fun main():int = 300

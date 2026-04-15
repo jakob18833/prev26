@@ -1,5 +1,14 @@
-// ERROR: function body type does not match declared return type
-fun compute() : int =
-    true
+typ shell = int
 
-fun main() : int = 0
+typ f = (:shell:int)
+typ g = (:int:int)
+
+fun main():int= let
+                    var real :f
+                    var funn :g
+                in
+                    real(5),
+                    funn(4)
+                end
+                ,
+                300

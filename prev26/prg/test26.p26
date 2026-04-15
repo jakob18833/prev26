@@ -1,14 +1,8 @@
-// VALID: mutually recursive pointer types (linked list) + field access via alias
-typ node = (val: int, next: ^node)
+typ shellc = char
+typ shell = {k1:int, k2:shellc}
+typ union = {k1: int, k2:char}
+typ se_ena = shell
 
-var head : node
+fun f(a:^se_ena):^union=a
 
-fun main() : int =
-    let
-        var n : node
-        var v : int
-    in
-        n.val = 5,
-        v = n.val,
-        v
-    end
+fun main():int=300

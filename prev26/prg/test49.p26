@@ -1,0 +1,13 @@
+typ pi = ^int
+typ ppi = ^pi
+
+fun main():int =
+    let
+        var x : int
+        var p : pi
+        var pp : ppi
+    in
+        x = 42,
+        sizeof ppi
+    end,
+    300

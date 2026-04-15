@@ -1,0 +1,3 @@
+typ a = [10]a
+
+fun main():int=let var x: a in 1 end

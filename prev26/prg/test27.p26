@@ -1,4 +1,14 @@
-// ERROR: pointer to void is not allowed
-var p : ^void
+typ f = (::int)
+typ g = (::int)
 
-fun main() : int = 0
+
+
+fun main():int= let
+                    var kazalec1 : ^f
+                    var kazalec2 : ^g
+                in
+                    kazalec1 = 1234 as ^f,
+                    kazalec2 = kazalec1
+                end
+                ,
+                300

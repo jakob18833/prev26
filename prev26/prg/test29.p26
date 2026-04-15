@@ -1,12 +1,16 @@
-// VALID: sizeof expression returns int and is a constant
-typ record = (x: int, y: char)
+typ shell = int
 
-fun main() : int =
-    let
-        var sz : int
-        var sz2 : int
-    in
-        sz = sizeof(record),
-        sz2 = sizeof(int),
-        sz + sz2
-    end
+typ f = (::int)
+typ g = (::shell)
+
+
+
+fun main():int= let
+                    var kazalec1 : ^f
+                    var kazalec2 : ^g
+                in
+                    kazalec1 = 1234 as ^f,
+                    kazalec2 = kazalec1
+                end
+                ,
+                300

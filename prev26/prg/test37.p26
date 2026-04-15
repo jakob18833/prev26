@@ -1,0 +1,9 @@
+typ shell = int
+typ shellb = bool
+
+
+fun f(a:int, b:shell, c:bool, d:shellb):shellb=true
+fun mainnnnnnnnnnnnnnnnn(a:int, b:shell, c:bool, d:shellb) : shellb = -0, +a, -b, not c, not d, f(1, 2, true, false)
+
+
+fun main():int=1

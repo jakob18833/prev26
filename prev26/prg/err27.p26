@@ -1,0 +1,7 @@
+// arr, str, uni
+
+fun funny(a:(k:int)):int
+
+
+
+fun main():int = 300

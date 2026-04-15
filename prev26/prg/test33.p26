@@ -1,0 +1,13 @@
+
+typ lab=void
+typ posreden = ^lab
+var a : posreden
+
+
+
+
+
+
+
+
+fun main():int = 300

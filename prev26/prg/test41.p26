@@ -1,0 +1,9 @@
+typ ime = int
+
+typ f = (:ime:ime)
+typ g = (:int:int)
+
+var a:f
+var b:g
+
+fun main():int = a > b ,300

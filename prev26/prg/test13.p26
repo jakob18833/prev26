@@ -1,6 +1,14 @@
- typ vv = void
+typ shell5 = int
+typ shell4 = shell5
+typ shell3 = shell4
+typ shell2 = shell3
+typ shell = shell2
 
- fun f1(p1:(i:int, j:int)):int
- fun f2(p2:{i:int, j:int}):char
- fun f3(p3:{s1: {s21:{i:int, j: int}, s22:{i:int, j:int}}, s2:(i:int, j: int)}):bool
- fun f4(p4:vv):vv
+
+fun main():int= let
+                    var a:^shell
+                    var b:^int
+                in
+                    a = b
+                end,
+                100

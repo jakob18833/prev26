@@ -1,2 +1,4 @@
-// vzajemna rekurzija
-typ list = (first: int, rest:list)
+typ a = {c:int, d:^b}
+typ b = {c:int, d:^a}
+
+fun main():int=1

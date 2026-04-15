@@ -1,4 +1,16 @@
-// ERROR: array with void element type is not allowed
-var a : [5]void
 
-fun main() : int = 0
+
+typ f = (::int)
+typ g = (::f)
+
+
+
+fun main():int= let
+                    var kazalec1 : ^g
+                    var kazalec2 : ^(::(::int))
+                in
+                    kazalec1 = 1234 as ^g,
+                    kazalec2 = kazalec1
+                end
+                ,
+                300

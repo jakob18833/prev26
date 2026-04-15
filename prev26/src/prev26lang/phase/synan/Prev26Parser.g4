@@ -264,6 +264,12 @@ prefixExpr
         | tok=NOT e=prefixExpr
             { $ast = new AST.PfxExpr(AST.PfxExpr.Oper.NOT, $e.ast);
             Abstr.locAttr.put($ast, loc($tok, $e.stop)); }
+        | tok=MINUS i=INTCONST
+            { $ast = new AST.AtomExpr(AST.AtomExpr.Type.INT, "-" + $i.text);
+            Abstr.locAttr.put($ast, loc($tok, $tok)); }
+        | tok=PLUS i=INTCONST
+            { $ast = new AST.AtomExpr(AST.AtomExpr.Type.INT, "+" + $i.text);
+            Abstr.locAttr.put($ast, loc($tok, $tok)); }
         | tok=PLUS e=prefixExpr
             { $ast = new AST.PfxExpr(AST.PfxExpr.Oper.ADD, $e.ast);
             Abstr.locAttr.put($ast, loc($tok, $e.stop)); }
@@ -311,9 +317,11 @@ atomExpr
             Abstr.locAttr.put($ast, loc($LET, $END)); }
         | LEFTBR e=expr_list RIGHTBR
             { $ast = $e.ast; }
+
         | tok=INTCONST
             { $ast = new AST.AtomExpr(AST.AtomExpr.Type.INT, $tok.text);
             Abstr.locAttr.put($ast, loc($tok, $tok)); }
+
         | tok=TRUE
             { $ast = new AST.AtomExpr(AST.AtomExpr.Type.BOOL, $tok.text);
             Abstr.locAttr.put($ast, loc($tok, $tok)); }

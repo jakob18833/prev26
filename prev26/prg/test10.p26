@@ -1,8 +1,2 @@
-typ ii = int
-
-fun main():int =
-    let fun c():int = 1 + 2
-        fun b():ii = 5 * 4 + 7 + 9
-    in
-        c() * b() + 100
-    end
+typ a = [9223372036854775807]int
+fun main():int=1

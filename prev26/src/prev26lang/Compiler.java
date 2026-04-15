@@ -3,7 +3,11 @@ package prev26lang;
 import prev26lang.common.report.Location;
 import prev26lang.common.report.Report;
 import prev26lang.phase.abstr.Abstr;
+import prev26lang.phase.imrgen.ImrGen;
+import prev26lang.phase.imrgen.ImrGenerator;
 import prev26lang.phase.lexan.LexAn;
+import prev26lang.phase.memory.Layouter;
+import prev26lang.phase.memory.Memory;
 import prev26lang.phase.seman.NameResolver;
 import prev26lang.phase.seman.SemAn;
 import prev26lang.phase.seman.TypeChecker;
@@ -49,6 +53,8 @@ public class Compiler {
             "synan",
             "abstr",
             "seman", // --: semantic analysis
+            "memory",
+            "imrgen",
             "all" // -----: putting it all together
     ));
 
@@ -174,6 +180,23 @@ public class Compiler {
                 }
                 if (cmdLineOpts.get("--target-phase").equals("seman"))
                     break;
+                // === MEMORY LAYOUT ===
+                try (Memory memory = new Memory()) {
+                    (new Layouter()).visit(Abstr.tree);
+                    Memory.frameAttr.lock();
+                    Memory.accessAttr.lock();
+                    Memory.stringAttr.lock();
+                    (new Memory.Logger(memory.xmlLogger)).visit(Abstr.tree);
+                }
+                if (cmdLineOpts.get("--target-phase").equals("memory"))
+                    break;
+                // === GENERATION OF INTERMEDIATE REPRESENTATION ===
+                try (ImrGen imrGen = new ImrGen()) {
+                    ImrGenerator.visit(Abstr.tree);
+                    (new ImrGen.Logger(imrGen.xmlLogger)).visit(Abstr.tree);
+                }
+                if (cmdLineOpts.get("--target-phase").equals("imrgen"))
+                break;
 
                 break;
 

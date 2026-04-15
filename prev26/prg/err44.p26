@@ -1,0 +1,13 @@
+typ point = (x:int, y:int)
+
+var p1 : ^point
+var p2 : ^point
+
+fun main():int =
+    let
+        var a : point
+        var b : point
+    in
+        a == b,
+        300
+    end

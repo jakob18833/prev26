@@ -2,31 +2,41 @@ package prev26lang.phase.seman;
 
 import prev26lang.common.report.Report;
 import prev26lang.phase.abstr.AST;
-import prev26lang.phase.abstr.Abstr;
 
 import java.util.*;
 
-
-
-public class TypeConstructor implements AST.FullVisitor<Void, Void> {
+public class TypeConstructor implements AST.FullVisitor<TYP.Type, Void> {
     AST.Visitor<TYP.Type, Void> typePreviewer = new TypePreviewer();
     @Override
-    public Void visit(AST.Nodes<? extends AST.Node> nodes, Void arg) {
+    public TYP.Type visit(AST.Nodes<? extends AST.Node> nodes, Void arg) {
 
         if (nodes.size() == 0) return null;
 
-        // AST root, let expression
         if (nodes.first() instanceof AST.FullDefn) {
             // first pass
-
             for (AST.Node node : nodes) {
                 if (node instanceof AST.TypDefn typDefnNode) {
-                    TYP.NameType t = new TYP.NameType(typDefnNode.name);
-                    SemAn.isTypeAttr.put(node, t);
+                    TYP.NameType type = new TYP.NameType(typDefnNode.name);
+                    SemAn.isTypeAttr.put(node, type);
+
+
                 }
             }
+            // Set placeholder types. This is necessary to do in this manner for 2 reasons:
+            // 1. typ a = (::a)
+            // This is allowed, but if no actualType() was set on 'a' beforehand, we will get an error
+            // when recursing into FunDefn and checking matchesGroupOrVoid on return type.
 
-            //second pass
+            // So in the light of 1., we try just try setting the actualType directly, without following
+            // the chain of renamings. Then we hit into a different problem:
+            // 2.
+            // typ a = b
+            // typ b = a
+            // fun main():int=let var x: a in 1 end
+            // This should throw an error, but we get a compiler crash instead.
+            // When we want to structurally compare varDefn.type to Void,
+            // we call its actualType, which is NameType of 'b'. The actualType of that is NameType of 'a',
+            // and Slivko's code throws an error.
             for (AST.Node node: nodes) {
                 // we are interested just in typDefn nodes, not varDefn
                 if (node instanceof AST.TypDefn typDefnNode) {
@@ -37,30 +47,24 @@ public class TypeConstructor implements AST.FullVisitor<Void, Void> {
                     HashSet<AST.TypDefn> visited = new HashSet<>();
                     AST.TypDefn helper = typDefnNode;
                     while ( helper.type instanceof AST.NameType nameTypeHelper) {
-//                        Report.info("Currrently at typDefn " + helper.name + ", visited=" + visited);
-                        // get the definition
                         AST.Defn nextHelper = SemAn.defAtAttr.get(nameTypeHelper);
-                        // if the definition statement is one of variable, parameter, or a function, we throw it.
-                        // Note that we can still use AST.FunType, but either case, it will be defined
-                        // inside a TypDefn node.
+                        // if the definition statement is one of variable, or a function, we throw an error.
                         if (! (nextHelper instanceof AST.TypDefn)) throw new Report.Error(typDefnNode, "Cannot define a type with a reference to variable!");
-                        // Check for cyclic types
                         else if (visited.contains(nextHelper)) {
-                            throw new Report.Error(typDefnNode, "Cyclic type detected!");
+                            throw new Report.Error(typDefnNode, "Cyclic type detected in TypeConstructor!");
                         } else {
-
                             visited.add((AST.TypDefn) nextHelper);
                             helper = (AST.TypDefn) nextHelper;
                         }
                     }
+
                     // Here we can assume helper is now a reference to a TypDefn, which contains type which is not NameType.
                     // We store its placeholder type.
                     TYP.Type placeholder = helper.type.accept(typePreviewer, null);
-//                    Report.info("Setting the actual type of " + t + " to " + placeholder);
                     t.setActType(placeholder);
                 }
             }
-            // third pass
+
             for (AST.Node node : nodes) {
                 node.accept(this, arg);
             }
@@ -76,137 +80,128 @@ public class TypeConstructor implements AST.FullVisitor<Void, Void> {
     }
 
     @Override
-    public Void visit(AST.TypDefn typDefn, Void arg) {
+    public TYP.Type visit(AST.TypDefn typDefn, Void arg) {
 
-        typDefn.type.accept(this, arg);
-        // Get the NameType object we stored in the first pass and provide info about actual type
-        TYP.NameType typDefnType = (TYP.NameType) SemAn.isTypeAttr.get(typDefn);
-        TYP.Type actType = SemAn.isTypeAttr.get(typDefn.type);
-        typDefnType.setActType(actType);
-        return arg;
+        TYP.Type actType = typDefn.type.accept(this, arg);
+        // Get the NameType object we stored in the first pass and append the actual type
+        TYP.NameType storedNameType = (TYP.NameType) SemAn.isTypeAttr.get(typDefn);
+        storedNameType.setActType(actType);
+        return storedNameType;
     }
 
 
     // TYPES
 
-
     @Override
-    public Void visit(AST.AtomType atomType, Void arg) {
-        switch (atomType.type) {
-
-            case AST.AtomType.Type.INT:
-                SemAn.isTypeAttr.put(atomType, TYP.IntType.type);
-                break;
-            case AST.AtomType.Type.BOOL:
-                SemAn.isTypeAttr.put(atomType, TYP.BoolType.type);
-                break;
-            case AST.AtomType.Type.CHAR:
-                SemAn.isTypeAttr.put(atomType, TYP.CharType.type);
-                break;
-            case AST.AtomType.Type.VOID:
-                SemAn.isTypeAttr.put(atomType, TYP.VoidType.type);
-        }
-        return null;
+    public TYP.Type visit(AST.AtomType atomType, Void arg) {
+        TYP.Type type = switch (atomType.type) {
+            case AST.AtomType.Type.INT -> TYP.IntType.type;
+            case AST.AtomType.Type.BOOL -> TYP.BoolType.type;
+            case AST.AtomType.Type.CHAR -> TYP.CharType.type;
+            case AST.AtomType.Type.VOID -> TYP.VoidType.type;
+        };
+        SemAn.isTypeAttr.put(atomType, type);
+        return type;
     }
 
     @Override
-    public Void visit(AST.PtrType ptrType, Void arg) {
-        ptrType.baseType.accept(this, arg);
-        TYP.Type baseType = SemAn.isTypeAttr.get(ptrType.baseType);
-        if (! TypeEquivalence.equivalent(baseType, TYP.VoidType.type)) {
-            SemAn.isTypeAttr.put(ptrType, new TYP.PtrType(baseType));
-        } else {
+    public TYP.Type visit(AST.PtrType ptrType, Void arg) {
+        TYP.Type baseType = ptrType.baseType.accept(this, arg);
+        // Check if it is directly (not structurally) equivalent to Void
+        if (baseType instanceof TYP.VoidType) {
             throw new Report.Error(ptrType, "Cannot have a pointer to Void!");
         }
-        return null;
+        TYP.PtrType type = new TYP.PtrType(baseType);
+//        System.out.println(type.getClass().getSimpleName());
+//        System.out.println(baseType.getClass().getSimpleName());
+        SemAn.isTypeAttr.put(ptrType, type);
+
+        return type;
     }
 
     @Override
-    public Void visit(AST.ArrType arrType, Void arg) {
-        arrType.elemType.accept(this, arg);
-        TYP.Type elementType = SemAn.isTypeAttr.get(arrType.elemType);
+    public TYP.Type visit(AST.ArrType arrType, Void arg) {
+        TYP.Type elementType = arrType.elemType.accept(this, arg);
         long numElems;
         try {
             numElems = Long.parseLong(arrType.numElems);
         } catch (NumberFormatException e) {
-            throw new Report.Error(Abstr.locAttr.get(arrType), "Array number of elements too large!");
+            throw new Report.Error(arrType, "Array number of elements overflow!");
         }
-        if (0 < numElems && ! TypeEquivalence.equivalent(elementType, TYP.VoidType.type)) {
-            SemAn.isTypeAttr.put(arrType, new TYP.ArrType(elementType, numElems));
+        if (0 < numElems && ! TypeEquivalence.equivalentToVoid(elementType)) {
+            TYP.Type type = new TYP.ArrType(elementType, numElems);
+            SemAn.isTypeAttr.put(arrType, type);
+            return type;
         } else {
             throw new Report.Error(arrType, "Illegal type for array or non positive number of elements!");
         }
-        return null;
     }
 
     @Override
-    public Void visit(AST.StrType strType, Void arg) {
-        for (var component: strType.comps) component.type.accept(this, arg);
+    public TYP.Type visit(AST.StrType strType, Void arg) {
         List<TYP.Type> compTypes = new ArrayList<>();
+        for (var component: strType.comps) compTypes.add(component.type.accept(this, arg));
         for (var node: strType.comps) {
-            TYP.Type compType = SemAn.isTypeAttr.get(node.type);
-            if (TypeEquivalence.equivalent(compType, TYP.VoidType.type)) {
-                throw new Report.Error(strType, "Struct type cannot contain components of type Void!");
+            if (compTypes.stream().anyMatch(TypeEquivalence::equivalentToVoid)) {
+                throw new Report.Error(strType, "Struct cannot have components structurally equivalent to void!");
             }
-            compTypes.add(compType);
         }
-        SemAn.isTypeAttr.put(strType, new TYP.StrType(compTypes));
-        return null;
+        TYP.Type type = new TYP.StrType(compTypes);
+        SemAn.isTypeAttr.put(strType, type);
+        return type;
     }
 
     @Override
-    public Void visit(AST.UniType uniType, Void arg) {
-        for (var component: uniType.comps) component.type.accept(this, arg);
+    public TYP.Type visit(AST.UniType uniType, Void arg) {
         List<TYP.Type> compTypes = new ArrayList<>();
-        for (var component: uniType.comps) {
-            TYP.Type compType = SemAn.isTypeAttr.get(component.type);
-            if (TypeEquivalence.equivalent(compType, TYP.VoidType.type)) {
-                throw new Report.Error(uniType, "Struct type cannot contain components of type Void!");
+        for (var component: uniType.comps) compTypes.add(component.type.accept(this, arg));
+        for (var node: uniType.comps) {
+            if (compTypes.stream().anyMatch(TypeEquivalence::equivalentToVoid)) {
+                throw new Report.Error(uniType, "Union cannot have components structurally equivalent to void!");
             }
-            compTypes.add(compType);
         }
-        SemAn.isTypeAttr.put(uniType, new TYP.UniType(compTypes));
-        return null;
+        TYP.Type type = new TYP.UniType(compTypes);
+        SemAn.isTypeAttr.put(uniType, type);
+        return type;
     }
 
     @Override
-    public Void visit(AST.FunType funType, Void arg) {
-        Set<Class<? extends TYP.Type>> allowedTypesPar = Set.of(TYP.IntType.class, TYP.CharType.class, TYP.BoolType.class, TYP.PtrType.class, TYP.FunType.class);
-        Set<Class<? extends TYP.Type>> allowedTypesReturn = Set.of(TYP.IntType.class, TYP.CharType.class, TYP.BoolType.class, TYP.VoidType.class, TYP.PtrType.class, TYP.FunType.class);
+    public TYP.Type visit(AST.FunType funType, Void arg) {
         // accept children
-        funType.resType.accept(this, arg);
-        funType.parTypes.forEach(par -> par.accept(this, arg));
-
-        // store children's types
         LinkedHashMap<AST.Type, TYP.Type> parTypes = new LinkedHashMap<>();
-        funType.parTypes.forEach(par -> parTypes.put(par, SemAn.isTypeAttr.get(par).actualType()));
-        TYP.Type resType = SemAn.isTypeAttr.get(funType.resType);
+        TYP.Type resType = funType.resType.accept(this, arg);
+        funType.parTypes.forEach(par -> parTypes.put(par, par.accept(this, arg)));
 
-        for (var entry: parTypes.entrySet()) {
-            Class<? extends TYP.Type> actualTypeClass = entry.getValue().actualType().getClass();
-            if (! allowedTypesPar.contains(actualTypeClass)) {
-                throw new Report.Error(Abstr.locAttr.get(entry.getKey()), "Illegal parameter type for FunType!");
-            }
+        if (!parTypes.values().stream().allMatch(TypeEquivalence::matchesGroup)) {
+            throw new Report.Error(funType, "Illegal parameter types for a funType!");
         }
-        if (! allowedTypesReturn.contains(resType.actualType().getClass())) {
-            throw new Report.Error(Abstr.locAttr.get(funType.resType), "Illegal return type for FunType!");
-        }
-        SemAn.isTypeAttr.put(funType, new TYP.FunType(parTypes.values().stream().toList(), resType));
-        return null;
+        if (!TypeEquivalence.matchesGroupOrVoid(resType)) throw new Report.Error(funType, "Illegal return type for a funType!");
+        TYP.Type type = new TYP.FunType(parTypes.values().stream().toList(), resType);
+        SemAn.isTypeAttr.put(funType, type);
+        return type;
     }
 
     @Override
-    public Void visit(AST.NameType nameType, Void arg) {
+    public TYP.Type visit(AST.NameType nameType, Void arg) {
 
 //        Report.info("Visiting nameType with name=" + nameType.name);
 //        Report.info(SemAn.isTypeAttr.get(nameType).toString());
 
-        // We get the node, where our nameType is defined. Because we
-        // never visit any AST.NameType nodes with variable definitions,
-        // we can cast the type.
-        AST.TypDefn typDefn = (AST.TypDefn) SemAn.defAtAttr.get(nameType);
-        SemAn.isTypeAttr.put(nameType, SemAn.isTypeAttr.get(typDefn));
-        return null;
+        // We get the node, where our nameType is defined. If we arrive at something else than a TypDefn, we
+        // throw an error.
+
+        AST.TypDefn typDefn = null;
+        try {
+            typDefn = (AST.TypDefn) SemAn.defAtAttr.get(nameType);
+        } catch (ClassCastException e) {
+            throw new Report.Error(nameType, "NameType defined not in typDefn found in TypeConstructor!");
+        }
+//        System.out.println("defined at " + typDefn);
+//        System.out.println("type: " + SemAn.isTypeAttr.get(typDefn.type));
+        // We just take the nameType of the definition and let it fill in the actualType itself.
+        TYP.Type type = SemAn.isTypeAttr.get(typDefn);
+        SemAn.isTypeAttr.put(nameType, type);
+        return type;
     }
 
 

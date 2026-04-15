@@ -1,0 +1,17 @@
+typ shell = int
+
+typ f = (:shell:int)
+typ g = (:int:int)
+
+
+
+fun main():int= let
+                    var real :^f
+                    var funn :^g
+                in
+                    real = funn,
+                    real^(funn^(2)),
+                    funn^(4)  //??!
+                end
+                ,
+                300

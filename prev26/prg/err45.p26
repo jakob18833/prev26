@@ -1,0 +1,9 @@
+fun f():int = 5
+
+fun main():int =
+    let
+        var p : ^int
+    in
+        p = ^(f() + 1),
+        300
+    end

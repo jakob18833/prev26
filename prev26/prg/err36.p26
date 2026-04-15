@@ -1,0 +1,8 @@
+
+fun f():void=none
+fun main():int= let
+                    var a:int
+                in
+                    ^f()
+                end,
+                300

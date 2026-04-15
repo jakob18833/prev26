@@ -1,12 +1,11 @@
-// VALID: array indexing — result type is the element type, not the array type
-var arr : [5]int
 
-fun main() : int =
-    let
-        var val : int
-    in
-        arr[0] = 42,
-        arr[1] = 13,
-        val = arr[0] + arr[1],
-        val
-    end
+typ shell = int
+fun main():int= let
+                    typ s1 = {k1:shell, k2:int}
+                    typ s2 = {k1:int, k2:shell}
+                    var a:s1
+                    var b:s2
+                in
+                    b.k1 = a.k1 + b.k2
+                end,
+                100

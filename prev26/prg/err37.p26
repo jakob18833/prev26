@@ -1,0 +1,5 @@
+
+
+typ ofsize = void
+
+fun main():int=300 + sizeof ofsize

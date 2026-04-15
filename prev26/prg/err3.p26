@@ -1,3 +1,8 @@
-// prekrivna funkcija
-fun abc(g: int): int = g
-fun abc(h: int, c:int): int = h + c
+typ a = b
+typ b = c
+typ c = d
+typ d = e
+typ e = f
+typ f = a
+
+fun main():int = 1

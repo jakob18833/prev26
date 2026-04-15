@@ -1,0 +1,13 @@
+typ callback = (:int:int)
+typ handler = (fn:callback, id:int)
+
+fun double(x:int):int = x * 2
+
+fun main():int =
+    let
+        var h : handler
+    in
+        h.id = 1,
+        sizeof handler
+    end,
+    300

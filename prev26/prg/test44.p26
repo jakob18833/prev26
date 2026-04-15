@@ -1,0 +1,7 @@
+typ shell = bool
+var b : shell
+fun main():int = while b == false
+                 do
+                    1
+                 end,
+                 300

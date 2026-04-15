@@ -1,0 +1,14 @@
+fun main () : int =
+    let
+        fun f():int =
+            let
+                fun g():int =
+                    f(),
+                    g()
+            in
+                f(),
+                g()
+            end
+    in
+        f()
+    end

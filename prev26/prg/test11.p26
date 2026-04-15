@@ -1,10 +1,1 @@
-
-
-
-fun f(a:int, b:int):int=
-    a + b,
-    let var a:int var b:int in
-        a = 0,
-        b = 0,
-        a + b
-    end
+fun main():int=let var b:int var a:int in b = -9223372036854775808, a = 9223372036854775807 end, 1

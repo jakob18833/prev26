@@ -1,0 +1,8 @@
+typ elem = int
+typ row = [8]elem
+typ grid = [8]row
+typ board = grid
+
+fun main():int =
+    sizeof board,
+    300

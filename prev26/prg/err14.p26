@@ -1,0 +1,8 @@
+typ shellc = bool
+typ shell = (k1:int, k2:shellc)
+typ struktura = (k1: int, k2:char)
+typ se_ena = shell
+
+fun f(a:^se_ena):^struktura=a
+
+fun main():int=300

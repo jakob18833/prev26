@@ -1,0 +1,3 @@
+typ a = {x:a}
+
+fun main():int=1

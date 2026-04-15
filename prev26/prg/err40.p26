@@ -1,0 +1,4 @@
+
+typ shell = void
+
+fun main():int=shell as int,300

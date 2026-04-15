@@ -1,8 +1,4 @@
-// vnaprejsnje deklaracije
-typ a = b
-typ b = int
+typ a = {c:int, d:^^^^b}
+typ b = {c:int, d:^^^^a}
 
-
-fun f() : int = g()
-fun g() : int = 1
-fun main(): int
+fun main():int=1

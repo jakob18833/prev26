@@ -1,0 +1,9 @@
+fun main() : int =
+    let
+        var s : ^char
+        var c : char
+    in
+        s = "hello",
+        c = s^,
+        300
+    end

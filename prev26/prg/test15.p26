@@ -1,34 +1,9 @@
-typ b = bool
-fun main() : b =
-    let var b1 : b var b2 : b in
-        if b1 and b2 or b1 or b2 then
-            b2 and b1 and true or false
-        else
-            let var b1 : b var b2 : b in
-                if b1 and b2 or b1 or b2 then
-                    b2 and b1 and true or false
-                else
-                    let var b1 : b var b2 : b in
-                        if b1 and b2 or b1 or b2 then
-                            b2 and b1 and true or false
-                        else
-                            (let var b1 : b var b2 : b in
-                                if b1 and b2 or b1 or b2 then
-                                    b2 and b1 and true or false
-                                else
-                                    false
-                                end
-                            end,
-                            let var b1 : b var b2 : b in
-                                if b1 and b2 or b1 or b2 then
-                                    b2 and b1 and true or false
-                                else
-                                    false
-                                end
-                            end)
-                        end
-                    end
-                end
-            end
-        end
-    end
+typ shell = int
+fun main():int= let
+                    var a:[10][20][30][40][50]shell
+                    var b:[10][20][30][40][50]int
+                in
+                    b[1][2][3][4][5] = 10,
+                    a[1][2][3][4][5] = b[1][2][3][4][5]
+                end,
+                100

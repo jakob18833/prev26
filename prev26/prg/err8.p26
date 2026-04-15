@@ -1,0 +1,11 @@
+typ shell2 = char
+typ shell = ^shell2
+typ shell3 = int
+
+fun main():int= let
+                    var a:[10]shell
+                    var b:[10]^shell3
+                in
+                    a = b
+                end,
+                100

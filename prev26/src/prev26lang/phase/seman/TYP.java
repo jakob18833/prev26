@@ -409,10 +409,10 @@ public class TYP {
 		/**
 		 * Constructs a new record type.
 		 * 
-		 * @param compTypes Types of components (no {@code null}s allowed).
+		 * @param names Names and types of components (no {@code null}s allowed).
 		 */
-		public RecType(final List<Type> compTypes) {
-			this.compTypes = new Types<Type>(compTypes);
+		public RecType(final List<Type> names) {
+			this.compTypes = new Types<>(names);
 		}
 
 	}
@@ -425,10 +425,10 @@ public class TYP {
 		/**
 		 * Constructs a new struct type.
 		 * 
-		 * @param compTypes Types of components (no {@code null}s allowed).
+		 * @param comps Types of components (no {@code null}s allowed).
 		 */
-		public StrType(final List<Type> compTypes) {
-			super(compTypes);
+		public StrType(final List<Type> comps) {
+			super(comps);
 		}
 
 		@Override
@@ -454,10 +454,10 @@ public class TYP {
 		/**
 		 * Constructs a new union type.
 		 * 
-		 * @param compTypes Types of components (no {@code null}s allowed).
+		 * @param comps Types of components (no {@code null}s allowed).
 		 */
-		public UniType(final List<Type> compTypes) {
-			super(compTypes);
+		public UniType(final List<Type> comps) {
+			super(comps);
 		}
 
 		@Override

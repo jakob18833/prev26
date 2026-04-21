@@ -1,5 +1,5 @@
 
-cd ../prev26
+cd ../prev26_wc
 make clean >/dev/null
 make >/dev/null
 
@@ -10,8 +10,8 @@ make >/dev/null
 echo "<h1>TEST REPORT</h1>" > all.html
 echo "<h3>Created $(date '+%d.%m.%Y %H:%M:%S') on $(uname -n)</h3>" >> all.html
 
-log_phases="imrlin"
-compile_phase="imrlin"
+log_phases="imrgen"
+compile_phase="imrgen"
 font_size="1.5"
 successful_tests=0
 failed_tests=0

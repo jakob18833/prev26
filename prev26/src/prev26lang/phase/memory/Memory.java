@@ -148,7 +148,7 @@ public class Memory extends Phase {
 					xmlLogger.begElement("access");
 					xmlLogger.addAttribute("size", Long.toString(absAccess.size));
 					xmlLogger.addAttribute("label", absAccess.label.name);
-					xmlLogger.addAttribute("init", absAccess.init);
+                    xmlLogger.addAttribute("init", ((AST.AtomExpr) stringAttr.reverseGet(absAccess)).value);
 					xmlLogger.endElement();
 				}
 				}

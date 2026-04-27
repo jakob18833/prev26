@@ -185,6 +185,12 @@ public class MEM {
 	 * 
 	 * @author bostjan.slivnik@fri.uni-lj.si
 	 */
+
+	// Used for 4 different things:
+	// 1. global variables
+	// 2. strings
+	// 3. code jumps
+	// 4. function names
 	static public class Label {
 
 		/** The name of a label. */

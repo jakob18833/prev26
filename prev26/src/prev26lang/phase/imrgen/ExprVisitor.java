@@ -14,31 +14,49 @@ import java.util.Vector;
 public class ExprVisitor implements AST.FullVisitor<IMR.Expr, Void> {
     MEM.Frame frame;
     long MAX_CONST = Long.MAX_VALUE;
-    long SL_CONST = 0x00000000_B16B00B5L;
+    long SL_CONST = 0xEEEE_EEEEL;
+    long VOID_CONST = 0xCCCC_CCCCL;
+
     public ExprVisitor(MEM.Frame frame) {
         this.frame = frame;
     }
 
-    IMR.Expr memoryHelper(AST.Node node, Void arg) {
+    // Writes to the genExpr!!
+    IMR.Expr memoryHelper(AST.Node node) {
         IMR.Expr address = node.accept(new AddrVisitor(frame), null);
         TYP.Type type = SemAn.ofTypeAttr.get(node);
+        IMR.Expr result;
         if (type.actualType() instanceof TYP.BoolType || type.actualType() instanceof TYP.CharType) {
-            return new IMR.MEM1(address);
-        } else return new IMR.MEM8(address);
+            result = new IMR.MEM1(address);
+        } else result = new IMR.MEM8(address);
+        ImrGen.genExprIMRAttr.put(node, result);
+
+        return result;
     }
 
+
+    private long parseChar(String c) {
+        if (c.charAt(1) == '\\') {
+            if (c.charAt(2) == 'x') {
+                return (long) Long.parseLong(c.substring(3, 5), 16);
+            } else if (c.charAt(2) == '\\') return 92L;
+            else if (c.charAt(2) == '\'') return 39L;
+            else throw new Report.Error("WTF");
+        } else return (long) c.charAt(1);
+    }
 
 
     @Override
     public IMR.Expr visit(AST.AtomExpr atomExpr, Void arg) {
         IMR.Expr result = switch (atomExpr.type) {
             case INT -> new IMR.CONST(Long.parseLong(atomExpr.value));
-            case CHAR -> new IMR.CONST(atomExpr.value.charAt(0));
+            case CHAR -> new IMR.CONST(parseChar(atomExpr.value));
             case BOOL -> atomExpr.value.equals("true") ? new IMR.CONST(1L) : new IMR.CONST(0L);
-            case VOID -> new IMR.CONST(MAX_CONST);
+            case VOID -> new IMR.CONST(VOID_CONST);
             case PTR -> new IMR.CONST(0L);
             case STR -> atomExpr.accept(new AddrVisitor(frame), null);
         };
+
         ImrGen.genExprIMRAttr.put(atomExpr, result);
         return result;
     }
@@ -79,16 +97,12 @@ public class ExprVisitor implements AST.FullVisitor<IMR.Expr, Void> {
 
     @Override
     public IMR.Expr visit(AST.SfxExpr sfxExpr, Void arg) {
-        IMR.Expr result = memoryHelper(sfxExpr, arg);
-        ImrGen.genExprIMRAttr.put(sfxExpr, result);
-        return result;
+        return memoryHelper(sfxExpr);
     }
 
     @Override
     public IMR.Expr visit(AST.NameExpr nameExpr, Void arg) {
-        IMR.Expr result = memoryHelper(nameExpr, arg);
-        ImrGen.genExprIMRAttr.put(nameExpr, result);
-        return result;
+        return memoryHelper(nameExpr);
     }
 
     @Override
@@ -104,18 +118,16 @@ public class ExprVisitor implements AST.FullVisitor<IMR.Expr, Void> {
 
     @Override
     public IMR.Expr visit(AST.ArrExpr arrExpr, Void arg) {
-        IMR.Expr result = memoryHelper(arrExpr, arg);
-        ImrGen.genExprIMRAttr.put(arrExpr, result);
-        return result;
+        return memoryHelper(arrExpr);
     }
 
     @Override
     public IMR.Expr visit(AST.CompExpr compExpr, Void arg) {
-        IMR.Expr result = memoryHelper(compExpr, arg);
-        ImrGen.genExprIMRAttr.put(compExpr, result);
-        return result;
-    }
+        // Just to set the attributes
+        compExpr.recExpr.accept(this, arg);
 
+        return memoryHelper(compExpr);
+    }
 
 
     @Override
@@ -130,33 +142,33 @@ public class ExprVisitor implements AST.FullVisitor<IMR.Expr, Void> {
         AST.Node funDefn = null;
         try {
             funDefn = SemAn.defAtAttr.get(callExpr.funExpr);
-        } catch (Report.InternalError _) {}
-        TYP.Type funType = SemAn.ofTypeAttr.get(callExpr.funExpr);
+        } catch (Report.InternalError _) {
+        }
+        TYP.FunType funType = (TYP.FunType) SemAn.ofTypeAttr.get(callExpr.funExpr).actualType();
+
         IMR.Expr funAddress = null;
         IMR.Expr SL = new IMR.CONST(SL_CONST);
-        if (funDefn != null) {
-            if (funDefn instanceof AST.ExtFunDefn extFunDefn) {
 
-                funAddress = callExpr.funExpr.accept(new AddrVisitor(frame), arg);
-                ImrGen.genExprIMRAttr.put(callExpr.funExpr, funAddress);
-            } else if (funDefn instanceof AST.DefFunDefn defFunDefn) {
-                funAddress = callExpr.funExpr.accept(new AddrVisitor(frame), arg);
-                ImrGen.genExprIMRAttr.put(callExpr.funExpr, funAddress);
+        // 1. scenario - we read the address
+        if (funDefn instanceof AST.FunDefn) {
+
+            funAddress = callExpr.funExpr.accept(new AddrVisitor(frame), arg);
+            ImrGen.genExprIMRAttr.put(callExpr.funExpr, funAddress);
+
+            // 1b
+            if (funDefn instanceof AST.DefFunDefn defFunDefn) {
                 MEM.Frame otherFrame = Memory.frameAttr.get(defFunDefn);
-                if (otherFrame.depth == 0) SL = new IMR.CONST(SL_CONST);
-                else {
-                    IMR.Expr SLexpr = new IMR.TEMP(this.frame.FP);
-                    for (int i = 0; i < this.frame.depth - otherFrame.depth + 1; i++) {
-                        SLexpr = new IMR.MEM8(SLexpr);
+                if (otherFrame.depth != 0) {
+                    SL = new IMR.TEMP(this.frame.FP);
+                    for (int i = 0; i <= this.frame.depth - otherFrame.depth; i++) {
+                        SL = new IMR.MEM8(SL);
                     }
-                    SL = SLexpr;
                 }
-            } else if (funDefn instanceof AST.VarDefn varDefn) {
-                funAddress = callExpr.funExpr.accept(this, arg);
             }
+            // 2. scenario - we read the expression
         } else {
-                // We just read the address of the function
-                funAddress = callExpr.funExpr.accept(this, arg);
+            funAddress = callExpr.funExpr.accept(this, arg);
+            ImrGen.genExprIMRAttr.put(callExpr.funExpr, funAddress);
         }
         Vector<Long> offsets = new Vector<>();
         Vector<IMR.Expr> arguments = new Vector<>();
@@ -164,12 +176,11 @@ public class ExprVisitor implements AST.FullVisitor<IMR.Expr, Void> {
         arguments.add(SL);
 
         long offset = 8L;
-        SizeofType sizeofType = new SizeofType(null);
-        for (var type: ((TYP.FunType) funType.actualType()).parTypes) {
+        for (var type : funType.parTypes) {
             offsets.add(offset);
-            offset += SizeofType.sizeof(type, null);
+            offset += SizeofType.sizeofRoundType(type, null);
         }
-        for (var argExpr: callExpr.argExprs) {
+        for (var argExpr : callExpr.argExprs) {
             arguments.add(argExpr.accept(this, arg));
         }
         IMR.Expr result = new IMR.CALL(funAddress, offsets, arguments);
@@ -199,14 +210,13 @@ public class ExprVisitor implements AST.FullVisitor<IMR.Expr, Void> {
 
     @Override
     public IMR.Expr visit(AST.AsgnExpr asgnExpr, Void arg) {
-        IMR.Expr address = asgnExpr.fstExpr.accept(this, arg);
+        IMR.Expr address = memoryHelper(asgnExpr.fstExpr);
         IMR.Expr value = asgnExpr.sndExpr.accept(this, arg);
         IMR.Stmt stmt = new IMR.MOVE(address, value);
         IMR.Expr result = new IMR.SEXPR(stmt, new IMR.CONST(0L));
         ImrGen.genExprIMRAttr.put(asgnExpr, result);
         return result;
     }
-
 
 
     @Override

@@ -76,7 +76,8 @@ public class XMLLogger implements AutoCloseable {
 			final StreamResult result = new StreamResult(new File(xmlFileName));
 			transformer.transform(source, result);
 		} catch (final TransformerException ex) {
-			Report.warning("Cannot open log file '" + xmlFileName + "'.");
+
+			Report.warning("Cannot open log file '" + xmlFileName + "'.\n" + ex);
 		}
 	}
 

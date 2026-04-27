@@ -26,7 +26,6 @@ public class ImrGenerator {
         funStmtVector.add(bodyStmt);
         // Not sure if this is needed
         funStmtVector.add(new IMR.JUMP(new IMR.NAME(exit)));
-        funStmtVector.add(new IMR.LABEL(exit));
         IMR.Stmt funStmt = new IMR.STMTS(funStmtVector);
 
         ImrGen.bodyEntryLabelAttr.put(defFunDefn, entry);

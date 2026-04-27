@@ -1,0 +1,4 @@
+fun main():int = 1
+var j: int
+fun inc(i:int):int = inc(inc((g(), g())))
+fun g():int = j = j + 1, j

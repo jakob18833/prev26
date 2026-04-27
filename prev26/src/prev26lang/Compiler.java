@@ -5,6 +5,10 @@ import prev26lang.common.report.Report;
 import prev26lang.phase.abstr.Abstr;
 import prev26lang.phase.imrgen.ImrGen;
 import prev26lang.phase.imrgen.ImrGenerator;
+import prev26lang.phase.imrlin.ImrLin;
+import prev26lang.phase.imrlin.Interpreter;
+import prev26lang.phase.imrlin.LIN;
+import prev26lang.phase.imrlin.LinVisitor;
 import prev26lang.phase.lexan.LexAn;
 import prev26lang.phase.memory.Layouter;
 import prev26lang.phase.memory.Memory;
@@ -55,6 +59,7 @@ public class Compiler {
             "seman", // --: semantic analysis
             "memory",
             "imrgen",
+            "imrlin",
             "all" // -----: putting it all together
     ));
 
@@ -157,15 +162,6 @@ public class Compiler {
                 if (cmdLineOpts.get("--target-phase").equals("abstr")) break;
 
                 // === SEMANTIC ANALYSIS ===
-//                try (SemAn seman = new SemAn()) {
-//                    NameResolver nameResolver = new NameResolver();
-//                    Abstr.tree.accept(nameResolver, true);
-//                    SemAn.defAtAttr.lock();
-//                    Report.info("Got here.");
-//
-//                    (new SemAn.Logger(seman.xmlLogger)).visit(Abstr.tree);
-//                }
-                // === SEMANTIC ANALYSIS ===
                 try (SemAn seman = new SemAn()) {
                     (new NameResolver()).visit(Abstr.tree);
                     (new TypeConstructor()).visit(Abstr.tree);
@@ -180,6 +176,7 @@ public class Compiler {
                 }
                 if (cmdLineOpts.get("--target-phase").equals("seman"))
                     break;
+
                 // === MEMORY LAYOUT ===
                 try (Memory memory = new Memory()) {
                     (new Layouter()).visit(Abstr.tree);
@@ -188,18 +185,32 @@ public class Compiler {
                     Memory.stringAttr.lock();
                     (new Memory.Logger(memory.xmlLogger)).visit(Abstr.tree);
                 }
-                if (cmdLineOpts.get("--target-phase").equals("memory"))
-                    break;
+                if (cmdLineOpts.get("--target-phase").equals("memory")) break;
+
                 // === GENERATION OF INTERMEDIATE REPRESENTATION ===
                 try (ImrGen imrGen = new ImrGen()) {
                     ImrGenerator.visit(Abstr.tree);
                     (new ImrGen.Logger(imrGen.xmlLogger)).visit(Abstr.tree);
                 }
-                if (cmdLineOpts.get("--target-phase").equals("imrgen"))
-                break;
+                if (cmdLineOpts.get("--target-phase").equals("imrgen")) break;
+
+                try (ImrLin imrLin = new ImrLin()) {
+                    LinVisitor linVisitor = new LinVisitor();
+                    linVisitor.visit(Abstr.tree);
+                    (new ImrLin.Logger(imrLin.xmlLogger)).visit(Abstr.tree);
+                    Vector<LIN.DataChunk> dataChunks = ImrLin.dataChunkAttr.values();
+                    Vector<LIN.CodeChunk> codeChunks = ImrLin.codeChunkAttr.values();
+
+                    System.out.println("************************");
+                    System.out.println("Interpreted program:");
+                    Interpreter interpreter = new Interpreter(dataChunks, codeChunks, false);
+                    long value = interpreter.run("_main");
+                    System.out.println("Function _main returned " + value);
+                    System.out.println("************************");
+                }
+
 
                 break;
-
             }
 
 

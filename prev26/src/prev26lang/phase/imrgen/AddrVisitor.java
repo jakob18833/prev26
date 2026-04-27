@@ -26,24 +26,26 @@ public class AddrVisitor implements AST.FullVisitor<IMR.Expr, Void> {
     public IMR.Expr visit(AST.NameExpr nameExpr, Void arg) {
         // NameExpr could be one of the following:
         // 1. Variable
-        // 2. Type
-        // 3. Component
-        // 4. Function
-        // If it is a function or type (which it shouldn't be), we handle it differently, as its access atribute is not set.
+        // 2. Component
+        // 3. Defined function
+        // 4. External function
         AST.Defn definedAt = SemAn.defAtAttr.get(nameExpr);
-        if (definedAt instanceof AST.DefFunDefn defFunDefn) {
-            MEM.Frame frame = Memory.frameAttr.get(defFunDefn);
-            return new IMR.NAME(frame.label);
-        } else if(definedAt instanceof AST.ExtFunDefn extFunDefn) {
-            return new IMR.NAME(new MEM.Label());
-        } else if(definedAt instanceof AST.TypDefn) {
-            return new IMR.CONST(0L);
+        switch (definedAt) {
+            case AST.DefFunDefn defFunDefn -> {
+                MEM.Frame frame = Memory.frameAttr.get(defFunDefn);
+                return new IMR.NAME(frame.label);
+            }
+            case AST.ExtFunDefn extFunDefn -> {
+                return new IMR.NAME(new MEM.Label(extFunDefn.name));
+            }
+            default -> {}
         }
+
         // We can now get its access attr
         MEM.Access access = Memory.accessAttr.get(definedAt);
         switch (access) {
             // remove this when you know whether we need it or not
-            case null -> throw new Report.Error(nameExpr, "Called AddrVisitor on node with null access attribute!");
+            // case null -> throw new Report.Error(nameExpr, "Called AddrVisitor on node with null access attribute!");
             case MEM.AbsAccess absAccess -> {
                 return new IMR.NAME(absAccess.label);
             }
@@ -63,8 +65,16 @@ public class AddrVisitor implements AST.FullVisitor<IMR.Expr, Void> {
 
     @Override
     public IMR.Expr visit(AST.ArrExpr arrExpr, Void arg) {
+//        System.out.println("===ARR EXPR in AddrVisitor===");
+//        System.out.println("AST:");
+//        System.out.println("arrExpr: " + arrExpr);
+//        System.out.println("arrExpr.arrExpr: " + arrExpr.arrExpr);
+//        System.out.println("arrExpr.index: " + arrExpr.idx);
+
         IMR.Expr arrAddress = arrExpr.arrExpr.accept(this, arg);
         IMR.Expr indexExpr = arrExpr.idx.accept(new ExprVisitor(frame), arg);
+//        System.out.println("IMR:");
+//        System.out.println("arr address: " + arrAddress + " index expr: " + indexExpr);
         TYP.Type elementType = ((TYP.ArrType) SemAn.ofTypeAttr.get(arrExpr.arrExpr).actualType()).elemType;
         long elementSize = SizeofType.sizeof(elementType, null);
         IMR.Expr offset = new IMR.BINOP(IMR.BINOP.Oper.MUL, indexExpr, new IMR.CONST(elementSize));
@@ -74,7 +84,6 @@ public class AddrVisitor implements AST.FullVisitor<IMR.Expr, Void> {
     @Override
     public IMR.Expr visit(AST.CompExpr compExpr, Void arg) {
         IMR.Expr recordAddress = compExpr.recExpr.accept(this, arg);
-        ImrGen.genExprIMRAttr.put(compExpr.recExpr, recordAddress);
         TYP.Type recordType = SemAn.ofTypeAttr.get(compExpr.recExpr).actualType();
         AST.RecType recAST = (AST.RecType) SemAn.isTypeAttr.reverseGet(recordType);
         for (var compDefn: recAST.comps) {
@@ -89,5 +98,20 @@ public class AddrVisitor implements AST.FullVisitor<IMR.Expr, Void> {
     @Override
     public IMR.Expr visit(AST.SfxExpr sfxExpr, Void arg) {
         return sfxExpr.subExpr.accept(new ExprVisitor(frame), null);
+    }
+
+    // Consider the case:
+    // var a: ^char
+    // a = "abc"
+    // putchar((a as [3]char)[1])
+    // The cast expression needs its own address!
+    @Override
+    public IMR.Expr visit(AST.CastExpr castExpr, Void arg) {
+        return castExpr.expr.accept(this, arg);
+    }
+    // Same case as the above - (a as [3]char) is AST.Exprs
+    @Override
+    public IMR.Expr visit(AST.Exprs exprs, Void arg) {
+        return exprs.exprs.last().accept(this, arg);
     }
 }

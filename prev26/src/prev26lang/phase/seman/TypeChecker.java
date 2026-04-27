@@ -400,9 +400,8 @@ public class TypeChecker implements AST.FullVisitor<TYP.Type, Boolean> {
         TYP.Type exprType = castExpr.expr.accept(this, arg);
         castExpr.type.accept(this, arg);
         TYP.Type typeType = SemAn.isTypeAttr.get(castExpr.type);
-        if (exprType == null) throw new Report.Error(castExpr, "Left side of the cast has no OFTYPE");
         // if the left side is a nameType
-//        if (exprType == null) throw new Report.Error(castExpr, "Expression has no ofType and cannot be cast!");
+        if (exprType == null) throw new Report.Error(castExpr, "Left side of the cast has no OFTYPE");
         if (TypeEquivalence.equivalentToVoid(exprType) || TypeEquivalence.equivalentToVoid(typeType)) {
             throw new Report.Error(castExpr, "Cannot cast void to sth or cannot cast sth to void!");
         }

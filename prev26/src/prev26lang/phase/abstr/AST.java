@@ -1858,6 +1858,9 @@ public class AST {
         public Node reverseGet(Value value) {
             return reverseMap.get(value);
         }
+		public Vector<Value> values() {
+			return new Vector<>(reverseMap.keySet());
+		}
 
 		/**
 		 * Makes this attribute immutable.

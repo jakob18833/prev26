@@ -1,0 +1,2 @@
+var tmp: (a:int, b:int)
+fun main():int = tmp as (z:char, z1:char, z2:char), 1

@@ -1,0 +1,4 @@
+// test2: nested function calls, static link
+// expect Result: 15
+fun add(a:int, b:int):int = a + b
+fun main():int = add(6, 9)

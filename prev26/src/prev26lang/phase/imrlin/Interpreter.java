@@ -9,492 +9,345 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
 
-/**
- * Interpreter - for testing purposes only.
- */
+/** Interpreter for testing purposes. */
 public class Interpreter {
 
-	private Scanner scanner = new Scanner(System.in);
-
-	private boolean debug = false;
-
-	private Random random;
+	private final Scanner scanner = new Scanner(System.in);
+	private final Random random = new Random();
+	private boolean debug;
 
 	private HashMap<Long, Byte> memory;
-
 	private HashMap<MEM.Temp, Long> temps;
+	private HashMap<MEM.Label, Long> dataLabels;
+	private HashMap<MEM.Label, Integer> jumpLabels;
+	private HashMap<MEM.Label, LIN.CodeChunk> callLabels;
 
-	private HashMap<MEM.Label, Long> dataMemLabels;
+	private MEM.Temp SP, FP, RV, HP;
 
-	private HashMap<MEM.Label, Integer> jumpMemLabels;
+	private void dbg(String fmt, Object... args) {
+		if (debug) System.out.printf("[DBG] " + fmt + "\n", args);
+	}
 
-	private HashMap<MEM.Label, LIN.CodeChunk> callMemLabels;
-
-	private MEM.Temp SP;
-
-	private MEM.Temp FP;
-
-	private MEM.Temp RV;
-
-	private MEM.Temp HP;
-
-	public Interpreter(Vector<LIN.DataChunk> dataChunks, Vector<LIN.CodeChunk> codeChunks) {
-		random = new Random();
-
-		this.memory = new HashMap<Long, Byte>();
-		this.temps = new HashMap<MEM.Temp, Long>();
+	public Interpreter(Vector<LIN.DataChunk> dataChunks, Vector<LIN.CodeChunk> codeChunks, Boolean debug) {
+		this.debug = debug;
+		memory = new HashMap<>();
+		temps = new HashMap<>();
+		dataLabels = new HashMap<>();
+		jumpLabels = new HashMap<>();
+		callLabels = new HashMap<>();
 
 		SP = new MEM.Temp();
-		tempST(SP, 0x7FFFFFFFFFFFFFF8l);
+		tempST(SP, 1_000_000_000_000_000L);
 		HP = new MEM.Temp();
-		tempST(HP, 0x2000000000000000l);
+		tempST(HP, 0L);
 
-		this.dataMemLabels = new HashMap<MEM.Label, Long>();
-		for (LIN.DataChunk dataChunk : dataChunks) {
-			if (debug) {
-				System.out.printf("### %s @ %d\n", dataChunk.label.name, tempLD(HP, false));
-			}
-			this.dataMemLabels.put(dataChunk.label, tempLD(HP, false));
-			if (dataChunk.init != null) {
-				for (int c = 0; c < dataChunk.init.length() - 2; c++)
-					memST(tempLD(HP, false) + 8 * c, (long) dataChunk.init.charAt(c + 1), false);
-				memST(tempLD(HP, false) + 8 * (dataChunk.init.length() - 2), 0L, false);
-			}
-			tempST(HP, tempLD(HP, false) + dataChunk.size, debug);
+		dbg("=== DATA SEGMENTS ===");
+		for (LIN.DataChunk chunk : dataChunks) {
+			long addr = tempLD(HP, false);
+			dataLabels.put(chunk.label, addr);
+			dbg("  DATA  %-20s  addr=%-12d  size=%d%s",
+				chunk.label.name, addr, chunk.size,
+				chunk.init != null
+					? "  init=\"" + chunk.init.replace("\n", "\\n") + "\""
+					: "  (uninitialized)");
+			if (chunk.init != null)
+				for (int i = 0; i < chunk.init.length(); i++)
+					memST1(addr + i, (byte) chunk.init.charAt(i), false);
+			tempST(HP, tempLD(HP, false) + chunk.size, false);
 		}
-		if (debug)
-			System.out.printf("###\n");
+		dbg("=== END DATA SEGMENTS ===");
 
-		this.jumpMemLabels = new HashMap<MEM.Label, Integer>();
-		this.callMemLabels = new HashMap<MEM.Label, LIN.CodeChunk>();
-		for (LIN.CodeChunk codeChunk : codeChunks) {
-			this.callMemLabels.put(codeChunk.frame.label, codeChunk);
-			Vector<IMR.Stmt> stmts = codeChunk.stmts();
-			for (int stmtOffset = 0; stmtOffset < stmts.size(); stmtOffset++) {
-				if (stmts.get(stmtOffset) instanceof IMR.LABEL)
-					jumpMemLabels.put(((IMR.LABEL) stmts.get(stmtOffset)).label, stmtOffset);
-			}
+		for (LIN.CodeChunk chunk : codeChunks) {
+			callLabels.put(chunk.frame.label, chunk);
+			Vector<IMR.Stmt> stmts = chunk.stmts();
+			for (int i = 0; i < stmts.size(); i++)
+				if (stmts.get(i) instanceof IMR.LABEL lbl)
+					jumpLabels.put(lbl.label, i);
 		}
 	}
 
-	private void memST(Long address, Long value) {
-		memST(address, value, debug);
+	// -------------------------------------------------------------------------
+	// Memory
+	// -------------------------------------------------------------------------
+
+	private void memST(long addr, long value) { memST(addr, value, debug); }
+	private void memST(long addr, long value, boolean log) {
+		if (log) dbg("  MEM8[%d] <- %d", addr, value);
+		for (int b = 0; b < 8; b++, value >>= 8)
+			memory.put(addr + b, (byte)(value & 0xFF));
 	}
 
-	private void memST(Long address, Long value, boolean debug) {
-		if (debug)
-			System.out.printf("### [%d] <- %d\n", address, value);
-		for (int b = 0; b <= 7; b++) {
-			long longval = value % 0x100;
-			byte byteval = (byte) longval;
-			memory.put(address + b, byteval);
-			value = value >> 8;
-		}
+	private void memST1(long addr, byte value) { memST1(addr, value, debug); }
+	private void memST1(long addr, byte value, boolean log) {
+		if (log) dbg("  MEM1[%d] <- %d", addr, value);
+		memory.put(addr, value);
 	}
 
-	private void memST1(Long address, Long value) {
-		if (debug)
-			System.out.printf("### [%d] <1- %d\n", address, value);
-		memory.put(address, (byte) (value & 0xFF));
-	}
-
-	private Long memLD1(Long address) {
-		Byte byteval = memory.get(address);
-		if (byteval == null)
-			byteval = (byte) (random.nextLong() / 0x100);
-		long longval = (long) byteval;
-		long value = longval < 0 ? longval + 0x100 : longval;
-		if (debug)
-			System.out.printf("### %d <1- [%d]\n", value, address);
-		return value;
-	}
-
-	private Long memLD(Long address) {
-		return memLD(address, debug);
-	}
-
-	private Long memLD(Long address, boolean debug) {
-		Long value = 0L;
+	private long memLD(long addr) { return memLD(addr, debug); }
+	private long memLD(long addr, boolean log) {
+		long value = 0;
 		for (int b = 7; b >= 0; b--) {
-			Byte byteval = memory.get(address + b);
-			if (byteval == null) {
-				byteval = (byte) (random.nextLong() / 0x100);
-				// throw new Report.Error("INTERPRETER: Uninitialized memory location " +
-				// (address + b) + ".");
+			Byte raw = memory.get(addr + b);
+			if (raw == null) {
+				raw = (byte) random.nextLong();
+				Report.warning("INTERPRETER: Uninitialized memory at " + (addr + b));
 			}
-			long longval = (long) byteval;
-			value = (value * 0x100) + (longval < 0 ? longval + 0x100 : longval);
+			value = (value << 8) | (raw & 0xFFL);
 		}
-		if (debug)
-			System.out.printf("### %d <- [%d]\n", value, address);
+		if (log) dbg("  MEM8[%d] -> %d", addr, value);
 		return value;
 	}
 
-	private void tempST(MEM.Temp temp, Long value) {
-		tempST(temp, value, debug);
+	private byte memLD1(long addr) { return memLD1(addr, debug); }
+	private byte memLD1(long addr, boolean log) {
+		Byte raw = memory.get(addr);
+		if (raw == null) {
+			raw = (byte) random.nextLong();
+			Report.warning("INTERPRETER: Uninitialized memory at " + addr);
+		}
+		if (log) dbg("  MEM1[%d] -> %d", addr, raw);
+		return raw;
 	}
 
-	private void tempST(MEM.Temp temp, Long value, boolean debug) {
-		temps.put(temp, value);
-		if (debug) {
-			if (temp == SP) {
-				System.out.printf("### SP <- %d\n", value);
-				return;
-			}
-			if (temp == FP) {
-				System.out.printf("### FP <- %d\n", value);
-				return;
-			}
-			if (temp == RV) {
-				System.out.printf("### RV <- %d\n", value);
-				return;
-			}
-			if (temp == HP) {
-				System.out.printf("### HP <- %d\n", value);
-				return;
-			}
-			System.out.printf("### T%d <- %d\n", temp.temp, value);
-			return;
-		}
+	// -------------------------------------------------------------------------
+	// Temporaries
+	// -------------------------------------------------------------------------
+
+	private String tempName(MEM.Temp t) {
+		if (t == SP) return "SP";
+		if (t == FP) return "FP";
+		if (t == RV) return "RV";
+		if (t == HP) return "HP";
+		return "T" + t.temp;
 	}
 
-	private Long tempLD(MEM.Temp temp) {
-		return tempLD(temp, debug);
+	private void tempST(MEM.Temp t, long value) { tempST(t, value, debug); }
+	private void tempST(MEM.Temp t, long value, boolean log) {
+		temps.put(t, value);
+		if (log) dbg("  %-4s <- %d", tempName(t), value);
 	}
 
-	private Long tempLD(MEM.Temp temp, boolean debug) {
-		Long value = temps.get(temp);
-		if (value == null) {
-			value = random.nextLong();
-			throw new Report.Error("Uninitialized temporary variable T" + temp.temp + ".");
-		}
-		if (debug) {
-			if (temp == SP) {
-				System.out.printf("### %d <- SP\n", value);
-				return value;
-			}
-			if (temp == FP) {
-				System.out.printf("### %d <- FP\n", value);
-				return value;
-			}
-			if (temp == RV) {
-				System.out.printf("### %d <- RV\n", value);
-				return value;
-			}
-			if (temp == HP) {
-				System.out.printf("### %d <- HP\n", value);
-				return value;
-			}
-			System.out.printf("### %d <- T%d\n", value, temp.temp);
-			return value;
-		}
+	private long tempLD(MEM.Temp t) { return tempLD(t, debug); }
+	private long tempLD(MEM.Temp t, boolean log) {
+		Long value = temps.get(t);
+		if (value == null)
+			throw new Report.Error("Uninitialized temporary " + tempName(t));
+		if (log) dbg("  %-4s -> %d", tempName(t), value);
 		return value;
 	}
+
+	// -------------------------------------------------------------------------
+	// Expression evaluator
+	// -------------------------------------------------------------------------
 
 	private class ExprInterpreter implements IMR.Visitor<Long, Object> {
 
+		@Override public Long visit(IMR.CALL n, Object a) { throw new Report.InternalError(); }
+		@Override public Long visit(IMR.SEXPR n, Object a) { throw new Report.InternalError(); }
+		@Override public Long visit(IMR.CONST n, Object a) { return n.value; }
+		@Override public Long visit(IMR.MEM8 n, Object a) { return memLD(n.addr.accept(this, null)); }
+		@Override public Long visit(IMR.MEM1 n, Object a) { return (long)(memLD1(n.addr.accept(this, null)) & 0xFF); }
+		@Override public Long visit(IMR.TEMP n, Object a) { return tempLD(n.temp); }
+		@Override public Long visit(IMR.NAME n, Object a) { return dataLabels.get(n.label); }
+
 		@Override
-		public Long visit(IMR.BINOP imcBinop, Object arg) {
-			Long fstExpr = imcBinop.fstExpr.accept(this, null);
-			Long sndExpr = imcBinop.sndExpr.accept(this, null);
-			switch (imcBinop.oper) {
-			case OR:
-				return (fstExpr != 0) | (sndExpr != 0) ? 1L : 0L;
-			case AND:
-				return (fstExpr != 0) & (sndExpr != 0) ? 1L : 0L;
-			case EQU:
-				return (fstExpr == sndExpr) ? 1L : 0L;
-			case NEQ:
-				return (fstExpr != sndExpr) ? 1L : 0L;
-			case LEQ:
-				return (fstExpr <= sndExpr) ? 1L : 0L;
-			case GEQ:
-				return (fstExpr >= sndExpr) ? 1L : 0L;
-			case LTH:
-				return (fstExpr < sndExpr) ? 1L : 0L;
-			case GTH:
-				return (fstExpr > sndExpr) ? 1L : 0L;
-			case ADD:
-				return fstExpr + sndExpr;
-			case SUB:
-				return fstExpr - sndExpr;
-			case MUL:
-				return fstExpr * sndExpr;
-			case DIV:
-				return fstExpr / sndExpr;
-			case MOD:
-				return fstExpr % sndExpr;
-			}
-			throw new Report.InternalError();
+		public Long visit(IMR.UNOP n, Object a) {
+			long v = n.subExpr.accept(this, null);
+			return switch (n.oper) {
+				case NOT -> v == 0 ? 1L : 0L;
+				case NEG -> -v;
+				default  -> throw new Report.InternalError();
+			};
 		}
 
 		@Override
-		public Long visit(IMR.CALL imcCall, Object arg) {
-			throw new Report.InternalError();
+		public Long visit(IMR.BINOP n, Object a) {
+			long l = n.fstExpr.accept(this, null);
+			long r = n.sndExpr.accept(this, null);
+			return switch (n.oper) {
+				case OR  -> (l != 0) | (r != 0) ? 1L : 0L;
+				case AND -> (l != 0) & (r != 0) ? 1L : 0L;
+				case EQU -> l == r ? 1L : 0L;
+				case NEQ -> l != r ? 1L : 0L;
+				case LEQ -> l <= r ? 1L : 0L;
+				case GEQ -> l >= r ? 1L : 0L;
+				case LTH -> l <  r ? 1L : 0L;
+				case GTH -> l >  r ? 1L : 0L;
+				case ADD -> l + r;
+				case SUB -> l - r;
+				case MUL -> l * r;
+				case DIV -> l / r;
+				case MOD -> l % r;
+				default  -> throw new Report.InternalError();
+			};
 		}
-
-		@Override
-		public Long visit(IMR.CONST imcConst, Object arg) {
-			return imcConst.value;
-		}
-
-		@Override
-		public Long visit(IMR.MEM1 imcMem, Object arg) {
-			return memLD1(imcMem.addr.accept(this, null));
-		}
-
-		@Override
-		public Long visit(IMR.MEM8 imcMem, Object arg) {
-			return memLD(imcMem.addr.accept(this, null));
-		}
-
-		@Override
-		public Long visit(IMR.NAME imcName, Object arg) {
-			return dataMemLabels.get(imcName.label);
-		}
-
-		@Override
-		public Long visit(IMR.SEXPR imcSExpr, Object arg) {
-			throw new Report.InternalError();
-		}
-
-		@Override
-		public Long visit(IMR.TEMP imcMemTemp, Object arg) {
-			return tempLD(imcMemTemp.temp);
-		}
-
-		@Override
-		public Long visit(IMR.UNOP imcUnop, Object arg) {
-			Long subExpr = imcUnop.subExpr.accept(this, null);
-			switch (imcUnop.oper) {
-			case NOT:
-				return (subExpr == 0) ? 1L : 0L;
-			case NEG:
-				return -subExpr;
-			}
-			throw new Report.InternalError();
-		}
-
 	}
+
+	// -------------------------------------------------------------------------
+	// Statement interpreter
+	// -------------------------------------------------------------------------
 
 	private class StmtInterpreter implements IMR.Visitor<MEM.Label, Object> {
 
-		@Override
-		public MEM.Label visit(IMR.CJUMP imcCJump, Object arg) {
-			if (debug)
-				System.out.println(imcCJump);
-			Long cond = imcCJump.cond.accept(new ExprInterpreter(), null);
-			return (cond != 0) ? ((IMR.NAME)imcCJump.posAddr).label : ((IMR.NAME)imcCJump.negAddr).label;
-		}
+		private final ExprInterpreter expr = new ExprInterpreter();
 
 		@Override
-		public MEM.Label visit(IMR.ESTMT imcEStmt, Object arg) {
-			if (debug)
-				System.out.println(imcEStmt);
-			if (imcEStmt.expr instanceof IMR.CALL) {
-				call((IMR.CALL) imcEStmt.expr);
-				return null;
-			}
-			imcEStmt.expr.accept(new ExprInterpreter(), null);
+		public MEM.Label visit(IMR.LABEL n, Object a) {
+			dbg("LABEL  %s:", n.label.name);
 			return null;
 		}
 
 		@Override
-		public MEM.Label visit(IMR.JUMP imcJump, Object arg) {
-			if (debug)
-				System.out.println(imcJump);
-			return ((IMR.NAME)imcJump.addr).label;
+		public MEM.Label visit(IMR.JUMP n, Object a) {
+			MEM.Label target = ((IMR.NAME) n.addr).label;
+			dbg("JUMP   -> %s", target.name);
+			return target;
 		}
 
 		@Override
-		public MEM.Label visit(IMR.LABEL imcMemLabel, Object arg) {
-			if (debug)
-				System.out.println(imcMemLabel);
+		public MEM.Label visit(IMR.CJUMP n, Object a) {
+			dbg("CJUMP  %s", n);
+			long cond = n.cond.accept(expr, null);
+			MEM.Label taken = cond != 0
+				? ((IMR.NAME) n.posAddr).label
+				: ((IMR.NAME) n.negAddr).label;
+			dbg("  cond=%d  -> %s", cond, taken.name);
+			return taken;
+		}
+
+		@Override
+		public MEM.Label visit(IMR.ESTMT n, Object a) {
+			dbg("ESTMT  %s", n);
+			if (n.expr instanceof IMR.CALL c) call(c);
+			else n.expr.accept(expr, null);
 			return null;
 		}
 
 		@Override
-		public MEM.Label visit(IMR.MOVE imcMove, Object arg) {
-			if (debug)
-				System.out.println(imcMove);
-			if (imcMove.dst instanceof IMR.MEM8) {
-				Long dst = ((IMR.MEM8) imcMove.dst).addr.accept(new ExprInterpreter(), null);
-				Long src;
-				if (imcMove.src instanceof IMR.CALL) {
-					call((IMR.CALL) imcMove.src);
-					src = memLD(tempLD(SP));
-				} else
-					src = imcMove.src.accept(new ExprInterpreter(), null);
-				memST(dst, src);
-				return null;
-			}
-			if (imcMove.dst instanceof IMR.MEM1) {
-				Long dst = ((IMR.MEM1) imcMove.dst).addr.accept(new ExprInterpreter(), null);
-				Long src;
-				if (imcMove.src instanceof IMR.CALL) {
-					call((IMR.CALL) imcMove.src);
-					src = memLD1(tempLD(SP));
-				} else
-					src = imcMove.src.accept(new ExprInterpreter(), null);
-				memST1(dst, src);
-				return null;
-			}
-			if (imcMove.dst instanceof IMR.TEMP) {
-				IMR.TEMP dst = (IMR.TEMP) (imcMove.dst);
-				Long src;
-				if (imcMove.src instanceof IMR.CALL) {
-					call((IMR.CALL) imcMove.src);
-					src = memLD(tempLD(SP));
-				} else
-					src = imcMove.src.accept(new ExprInterpreter(), null);
-				tempST(dst.temp, src);
-				return null;
-			}
-			throw new Report.InternalError();
+		public MEM.Label visit(IMR.MOVE n, Object a) {
+			dbg("MOVE   %s", n);
+			if (n.dst instanceof IMR.MEM8 dst)
+				memST(dst.addr.accept(expr, null), srcValue(n.src));
+			else if (n.dst instanceof IMR.MEM1 dst)
+				memST1(dst.addr.accept(expr, null), (byte)(srcValue(n.src) & 0xFF));
+			else if (n.dst instanceof IMR.TEMP dst)
+				tempST(dst.temp, srcValue(n.src));
+			else
+				throw new Report.InternalError();
+			return null;
 		}
 
-		@Override
-		public MEM.Label visit(IMR.STMTS imcStmts, Object arg) {
-			if (debug)
-				System.out.println(imcStmts);
-			throw new Report.InternalError();
-		}
-
-		private void call(IMR.CALL imcCall) {
-			Long offset = 0L;
-			for (IMR.Expr callArg : imcCall.args) {
-				Long callValue = callArg.accept(new ExprInterpreter(), null);
-				memST(tempLD(SP) + offset, callValue);
-				offset += 8;
-			}
-			MEM.Label addr = ((IMR.NAME) imcCall.addr).label;
-			if (addr.name.equals("_new")) {
-				Long size = memLD(tempLD(SP, false) + 1 * 8, false);
-				Long heapAddr = tempLD(HP);
-				tempST(HP, heapAddr + size);
-				memST(tempLD(SP), heapAddr, false);
-				return;
-			}
-			if (addr.name.equals("_del")) {
-				return;
-			}
-			if (addr.name.equals("_exit")) {
-				System.exit(1);
-			}
-			if (addr.name.equals("_putint")) {
-				Long c = memLD(tempLD(SP, false) + 1 * 8, false);
-				System.out.printf("%d", c);
-				return;
-			}
-			if (addr.name.equals("_getint")) {
-				Long l = scanner.nextLong();
-				memST(tempLD(SP), (long) l, false);
-				return;
-			}
-			if (addr.name.equals("_putchar")) {
-				Long c = memLD(tempLD(SP, false) + 1 * 8, false);
-				System.out.printf("%c", (char) ((long) c) % 0x100);
-				return;
-			}
-			if (addr.name.equals("_getchar")) {
-				char c = '\n';
-				try {
-					c = (char) System.in.read();
-				} catch (Exception __) {
-				}
-				memST(tempLD(SP), (long) c, false);
-				return;
-			}
-			funCall(addr);
-		}
-
-	}
-
-	public void funCall(MEM.Label entryMemLabel) {
-
-		HashMap<MEM.Temp, Long> storedMemTemps;
-		MEM.Temp storedFP = null;
-		MEM.Temp storedRV = null;
-
-		LIN.CodeChunk chunk = callMemLabels.get(entryMemLabel);
-		MEM.Frame frame = chunk.frame;
-		Vector<IMR.Stmt> stmts = chunk.stmts();
-		int stmtOffset;
-
-		/* PROLOGUE */
-		{
-			if (debug)
-				System.out.printf("###\n### CALL: %s\n", entryMemLabel.name);
-
-			// Store registers and FP.
-			storedMemTemps = temps;
-			temps = new HashMap<MEM.Temp, Long>(temps);
-			// Store RA.
-			// Create a stack frame.
-			FP = frame.FP;
-			RV = frame.RV;
-			tempST(frame.FP, tempLD(SP));
-			tempST(SP, tempLD(SP) - frame.size);
-			// Jump to the body.
-			stmtOffset = jumpMemLabels.get(chunk.entryLabel);
-		}
-
-		/* BODY */
-		{
-			int pc = 0;
-			MEM.Label label = null;
-
-			while (label != chunk.exitLabel) {
-				if (debug) {
-					pc++;
-					System.out.printf("### %s (%d):\n", chunk.frame.label.name, pc);
-					if (pc == 1000000)
-						break;
-				}
-
-				if (label != null) {
-					Integer offset = jumpMemLabels.get(label);
-					if (offset == null) {
-						throw new Report.InternalError();
-					}
-					stmtOffset = offset;
-				}
-
-				label = stmts.get(stmtOffset).accept(new StmtInterpreter(), null);
-
-				stmtOffset += 1;
-			}
-		}
-
-		/* EPILOGUE */
-		{
-			// Store the result.
-			memST(tempLD(frame.FP), tempLD(frame.RV));
-			// Destroy a stack frame.
-			tempST(SP, tempLD(SP) + frame.size);
-			// Restore registers and FP.
-			FP = storedFP;
-			RV = storedRV;
-			Long hp = tempLD(HP);
-			temps = storedMemTemps;
-			tempST(HP, hp);
-			// Restore RA.
-			// Return.
-
-			if (debug)
-				System.out.printf("### RETURN: %s\n###\n", entryMemLabel.name);
-		}
-
-	}
-
-	public long run(String entryMemLabel) {
-		for (MEM.Label label : callMemLabels.keySet()) {
-			if (label.name.equals(entryMemLabel)) {
-				funCall(label);
+		private long srcValue(IMR.Expr src) {
+			if (src instanceof IMR.CALL c) {
+				call(c);
 				return memLD(tempLD(SP));
 			}
+			return src.accept(expr, null);
 		}
-		throw new Report.InternalError();
+
+		@Override
+		public MEM.Label visit(IMR.STMTS n, Object a) {
+			throw new Report.InternalError();
+		}
 	}
 
+	// -------------------------------------------------------------------------
+	// Function dispatch
+	// -------------------------------------------------------------------------
+
+	private void call(IMR.CALL imcCall) {
+		ExprInterpreter expr = new ExprInterpreter();
+		long spBase = tempLD(SP, false);
+		long offset = 0;
+		int argIdx = 0;
+		for (IMR.Expr arg : imcCall.args) {
+			long val = arg.accept(expr, null);
+			dbg("  arg[%d] = %d  -> MEM[SP+%d]", argIdx++, val, offset);
+			memST(spBase + offset, val);
+			offset += 8;
+		}
+
+		if (!(imcCall.addr instanceof IMR.NAME named)) {
+			Report.warning("Cannot interpret function without a label!");
+			return;
+		}
+
+		switch (named.label.name) {
+			case "_new" -> {
+				long size = memLD(spBase + 8, false);
+				long heap = tempLD(HP);
+				tempST(HP, heap + size);
+				memST(spBase, heap, false);
+			}
+			case "_del" -> { /* no-op */ }
+			case "_exit" -> System.exit(1);
+			case "_putint" -> System.out.printf("%d", memLD(spBase + 8, false));
+			case "_getint" -> memST(spBase, scanner.nextLong(), false);
+			case "_putchar" -> System.out.printf("%c", (char)(memLD1(spBase + 8, false) & 0xFF));
+			case "_getchar" -> {
+				char c = '\n';
+				try { c = (char) System.in.read(); } catch (Exception ignored) {}
+				memST(spBase, (long) c, false);
+			}
+			default -> funCall(named.label);
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Execution
+	// -------------------------------------------------------------------------
+
+	public void funCall(MEM.Label label) {
+		LIN.CodeChunk chunk = callLabels.get(label);
+		MEM.Frame frame = chunk.frame;
+		Vector<IMR.Stmt> stmts = chunk.stmts();
+
+		// Prologue
+		dbg("CALL %s  (frame size=%d)", label.name, frame.size);
+		HashMap<MEM.Temp, Long> savedTemps = temps;
+		MEM.Temp savedFP = FP, savedRV = RV;
+		temps = new HashMap<>(temps);
+		FP = frame.FP;
+		RV = frame.RV;
+		tempST(frame.FP, tempLD(SP));
+		tempST(SP, tempLD(SP) - frame.size);
+		int stmtOffset = jumpLabels.get(chunk.entryLabel);
+
+		// Body
+		StmtInterpreter si = new StmtInterpreter();
+		MEM.Label next = null;
+		int pc = 0;
+		while (next != chunk.exitLabel) {
+			if (debug && ++pc == 1_000_000) {
+				dbg("!! Execution limit reached in %s, aborting", label.name);
+				break;
+			}
+			if (next != null) {
+				Integer idx = jumpLabels.get(next);
+				if (idx == null) throw new Report.InternalError();
+				stmtOffset = idx;
+			}
+			next = stmts.get(stmtOffset++).accept(si, null);
+		}
+
+		// Epilogue
+		long rv = tempLD(frame.RV, false);
+		memST(tempLD(frame.FP, false), rv, false);
+		long hp = tempLD(HP, false);
+		temps = savedTemps;
+		tempST(HP, hp, false);
+		FP = savedFP;
+		RV = savedRV;
+		dbg("RETURN %s  rv=%d", label.name, rv);
+	}
+
+	public long run(String entryLabel) {
+		for (MEM.Label label : callLabels.keySet())
+			if (label.name.equals(entryLabel)) {
+				funCall(label);
+				long rv = memLD(tempLD(SP));
+				return rv;
+			}
+		throw new Report.InternalError();
+	}
 }

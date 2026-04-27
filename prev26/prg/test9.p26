@@ -1,0 +1,10 @@
+// test9: array indexing and assignment
+// expect Result: 30
+fun main():int =
+    let
+        var a:[5]int
+    in
+        a[0] = 10,
+        a[1] = 20,
+        a[0] + a[1]
+    end

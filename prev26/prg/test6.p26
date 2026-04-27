@@ -1,0 +1,15 @@
+// test6: local variables, let expr
+// expect Result: 55
+fun main():int =
+    let
+        var i:int
+        var s:int
+    in
+        i = 1,
+        s = 0,
+        while i <= 10 do
+            s = s + i,
+            i = i + 1
+        end,
+        s
+    end

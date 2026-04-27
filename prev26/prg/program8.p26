@@ -1,0 +1,22 @@
+fun exit():void
+fun putint(i:int):void
+fun getint():int
+fun putchar(c:char):void
+fun getchar():char
+
+fun main():int=
+    let var n:int in
+        n = getint(),
+        putint(fib(n)),
+        n
+    end
+
+fun fib(n:int):int =
+    let var return:int in
+        if (n == 0 or n == 1) then
+            return = 1
+        else
+            return = fib(n-1) + fib(n-2)
+        end,
+        return
+    end

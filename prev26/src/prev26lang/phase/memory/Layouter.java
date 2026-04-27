@@ -2,8 +2,10 @@ package prev26lang.phase.memory;
 
 
 import prev26lang.phase.abstr.AST;
+import prev26lang.phase.imrgen.ExprVisitor;
 import prev26lang.phase.seman.SemAn;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class Layouter implements AST.FullVisitor<Void, Void> {
@@ -130,15 +132,49 @@ public class Layouter implements AST.FullVisitor<Void, Void> {
         return null;
     }
 
+    class CharStream {
+        private final String s;
+        private int pos = 0;
+
+        CharStream(String s) { this.s = s; }
+
+        boolean hasNext() { return pos < s.length(); }
+        char peek() { return s.charAt(pos); }
+        char next() { return s.charAt(pos++); }
+        String nextTwo() { return s.substring(pos, pos += 2); };
+
+    }
+
+
+
+    private String parseString(String c) {
+        StringBuilder out = new StringBuilder();
+        CharStream cs = new CharStream(c.substring(1, c.length()-1));
+        while (cs.hasNext()) {
+            char token = cs.next();
+            if (token == '\\') {
+                char token2 = cs.next();
+                if (token2 == 'x') {
+                    out.append((char) Long.parseLong(cs.nextTwo(), 16));
+                } else if (token2 == '\\') out.append("\\");
+                else if (token2 == '\"') out.append("\"");
+            } else {
+                out.append(token);
+            }
+        }
+        out.append('\0');
+        return out.toString();
+    }
+
     @Override
     public Void visit(AST.AtomExpr atomExpr, Void arg) {
         if (atomExpr.type.equals(AST.AtomExpr.Type.STR)) {
             Memory.stringAttr.put(
                     atomExpr,
                     new MEM.AbsAccess(
-                            atomExpr.value.length() - 2,
+                            atomExpr.value.length() - 1,
                             new MEM.Label(),
-                            atomExpr.value
+                            parseString(atomExpr.value)
                     )
             );
         }

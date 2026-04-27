@@ -1,0 +1,23 @@
+fun exit():void
+fun putint(i:int):void
+fun getint():int
+fun putchar(c:char):void
+fun getchar():char
+
+fun main():int=
+    let
+        var a: ^char
+    in
+        a = "abcdef\x0A",
+        printStr(a),
+        1
+    end
+
+fun printStr(a: ^char): void =
+    let var b: int in
+        b = a as int,
+        while ((b as ^char)^ != 0) do
+            putchar((b as ^char)^),
+            b = b + 1
+        end
+    end

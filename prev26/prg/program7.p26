@@ -1,0 +1,14 @@
+fun exit():void
+fun putint(i:int):void
+fun getint():int
+fun putchar(c:char):void
+fun getchar():char
+
+fun main(): int =
+    let var a: int in
+        a = 0,
+        while a < 10 do a = a + 1 end,
+        putint(a)
+    end,
+    putchar('\x0A'),
+    1

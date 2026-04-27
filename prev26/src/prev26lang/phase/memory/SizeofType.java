@@ -20,6 +20,9 @@ public class SizeofType extends TYP.FullVisitor<Long, Set<TYP.Type>> {
     public static long sizeof(TYP.Type type, AST.Node reference) {
         return type.accept(new SizeofType(reference), new HashSet<>());
     }
+    public static long sizeofRoundType(TYP.Type type, AST.Node reference) {
+        return sizeofRound(type.accept(new SizeofType(reference), new HashSet<>()));
+    }
     public static long sizeofRound(long size) {
         return (size + 7L) / 8L * 8L;
     }

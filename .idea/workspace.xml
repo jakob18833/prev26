@@ -5,252 +5,88 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff2a0d1a-a209-4e09-9590-fd6324928869" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/lib/xsl/imrgen.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/prg/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/Compiler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/logger/Loggable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/logger/XMLLogger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/logger/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/Locatable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/Location.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/Report.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/Phase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/imrgen/IMR.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/imrgen/ImrGen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/imrgen/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/ArgsSizeVisitor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Layouter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/LocsSizeVisitor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$AbsAccess.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$Access.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$Frame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$Label.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$RelAccess.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$Temp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Memory$Logger.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Memory.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/SizeofType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/lib/xsl/imrgen.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/lib/xsl/memory.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err0.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err10.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err11.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err12.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err13.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err14.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err15.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err16.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err17.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err18.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err19.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err20.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err21.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err22.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err23.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err24.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err25.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err26.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err27.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err28.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err29.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err30.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err31.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err32.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err33.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err34.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err35.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err36.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err37.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err38.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err39.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err4.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err40.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err41.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err42.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err43.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err44.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err45.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err47.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err48.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err49.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err5.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err50.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err51.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err52.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err6.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err7.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err8.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/err9.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/program2.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test0.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test32.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test33.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test34.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test35.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test36.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test37.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test38.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test39.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test40.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test41.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test42.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test43.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test44.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test45.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test46.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test47.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test48.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test49.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test50.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test51.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test52.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test53.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test54.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/prg/test55.p26" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/AddrVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ExprVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/IMR.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ImrGen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ImrGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/ArgsSizeVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Layouter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/LocsSizeVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/MEM.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Memory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/SizeofType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prevajalniki_zapiski.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/zip.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/63230046-seman.zip" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/63230046-seman.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/63230046-imrgen.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/63230046-program2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PR.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PR.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/lib/xsl/imrgen.xsl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/prg/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/Compiler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/logger/Loggable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/logger/XMLLogger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/logger/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/Locatable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/Location.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/Report.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/Phase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/imrgen/IMR.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/imrgen/ImrGen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/imrgen/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/.claude/settings.local.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/Compiler.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/Compiler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/common/report/Report$InternalError.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/common/report/Report$InternalError.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$ArrExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$ArrExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$ArrType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$ArrType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AsgnExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AsgnExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AtomExpr$Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AtomExpr$Type.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AtomExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AtomExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AtomType$Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AtomType$Type.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AtomType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$AtomType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/common/logger/XMLLogger.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/common/logger/XMLLogger.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Attribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Attribute.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$BinExpr$Oper.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$BinExpr$Oper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$BinExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$BinExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$CallExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$CallExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$CastExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$CastExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$CompDefn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$CompDefn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$CompExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$CompExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$DefFunDefn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$DefFunDefn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Defn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Defn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Expr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Expr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Exprs.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Exprs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$ExtFunDefn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$ExtFunDefn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$FullDefn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$FullDefn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$FullVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$FullVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$FunDefn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$FunDefn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$FunType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$FunType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$IfThenElseExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$IfThenElseExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$IfThenExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$IfThenExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$LetExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$LetExpr.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Logger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$NameExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$NameExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$NameType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$NameType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Nodes$NodesIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Nodes$NodesIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Nodes.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Nodes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$NullVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$NullVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$ParDefn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$ParDefn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$PartDefn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$PartDefn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$PfxExpr$Oper.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$PfxExpr$Oper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$PfxExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$PfxExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$PtrType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$PtrType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$RecType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$RecType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$SfxExpr$Oper.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$SfxExpr$Oper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$SfxExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$SfxExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$SizeExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$SizeExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$StrType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$StrType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$TypDefn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$TypDefn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Type.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$UniType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$UniType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$VarDefn.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$VarDefn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Visitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Visitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$WhileExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$WhileExpr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeChecker$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeChecker$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/AddrVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/AddrVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ExprVisitor$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ExprVisitor$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ExprVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ExprVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$BINOP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$BINOP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CALL.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CALL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CJUMP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CJUMP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CONST.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CONST.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$ESTMT.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$ESTMT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$JUMP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$JUMP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$LABEL.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$LABEL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MEM1.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MEM1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MEM8.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MEM8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MOVE.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MOVE.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$NAME.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$NAME.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$SEXPR.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$SEXPR.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$STMTS.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$STMTS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$Stmt.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$Stmt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$TEMP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$TEMP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$UNOP$Oper.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$UNOP$Oper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$UNOP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$UNOP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$Visitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$Visitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ImrGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ImrGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Layouter.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Layouter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$Label.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$Label.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Memory$Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Memory$Logger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/SizeofType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/SizeofType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeConstructor$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeConstructor$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeConstructor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeConstructor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeEquivalence.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeEquivalence.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypePreviewer.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypePreviewer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/synan/Prev26Parser$AtomExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/synan/Prev26Parser$AtomExprContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/synan/Prev26Parser$PostfixExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/synan/Prev26Parser$PostfixExprContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/synan/Prev26Parser$PrefixExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/synan/Prev26Parser$PrefixExprContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/synan/Prev26Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/synan/Prev26Parser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/MEGA._p26" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/err1.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/err1.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/err2.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/err2.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/err3.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/err3.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/program.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test1.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test1.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test10.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test10.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test11.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test11.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test12.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test12.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test13.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test13.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test14.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test14.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test15.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test15.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test16.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test16.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test17.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test17.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test18.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test18.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test19.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test19.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test2.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test2.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test20.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test20.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test21.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test21.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test22.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test22.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test23.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test23.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test24.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test24.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test25.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test25.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test26.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test26.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test27.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test27.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test28.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test28.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test29.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test29.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test3.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test3.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test30.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test30.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test31.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test31.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test4.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test4.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test5.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test5.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test6.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test6.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test7.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test7.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test8.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test8.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test9.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/test9.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/test_adrian.p26" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/program4.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program4.p26" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/program5.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program5.p26" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/program6.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program6.p26" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/program7.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program7.p26" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/program8.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program8.p26" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/Compiler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/common/report/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/common/report/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/common/logger/XMLLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/common/logger/XMLLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/abstr/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/abstr/AST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TYP.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TYP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/AddrVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/AddrVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ExprVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ExprVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/IMR.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/IMR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ImrGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ImrGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/ImrLin.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/ImrLin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/LIN.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/LIN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/LinVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/LinVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/Linearizator.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/Linearizator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Layouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Layouter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/MEM.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/MEM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Memory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/SizeofType.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/SizeofType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypeChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypeConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypeConstructor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypeEquivalence.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypeEquivalence.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypePreviewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypePreviewer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/synan/Prev26Parser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/synan/Prev26Parser.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/synan/Prev26Parser.interp" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/synan/Prev26Parser.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/synan/Prev26Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/synan/Prev26Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/test.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zip.sh" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -287,15 +123,25 @@
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/jakob/Documents/Noordung/LabSuite&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jakob/Documents/Noordung/openGLFX&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/prev26/lib/xsl" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/prev26/prg" />
+      <recent name="$PROJECT_DIR$/prev26/prg/old_tests" />
+    </key>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ff2a0d1a-a209-4e09-9590-fd6324928869" name="Changes" comment="" />
@@ -303,6 +149,14 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1774960056983</updated>
+      <workItem from="1776282988362" duration="1234000" />
+      <workItem from="1776415616342" duration="15000" />
+      <workItem from="1776421604810" duration="6000" />
+      <workItem from="1776464793511" duration="13000" />
+      <workItem from="1776547104080" duration="27942000" />
+      <workItem from="1776608093273" duration="22514000" />
+      <workItem from="1776779117873" duration="2000" />
+      <workItem from="1776938891940" duration="70000" />
     </task>
     <servers />
   </component>

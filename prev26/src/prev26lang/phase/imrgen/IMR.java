@@ -71,6 +71,7 @@ public class IMR {
 		public void log(XMLLogger logger) {
 			logger.begElement("imc");
 			logger.addAttribute("instruction", "BINOP(" + oper + ")");
+
 			fstExpr.log(logger);
 			sndExpr.log(logger);
 			logger.endElement();
@@ -235,7 +236,7 @@ public class IMR {
 		/** The memory address. */
 		public final Expr addr;
 
-		/**
+		/**MOVE
 		 * Constucts a memory access.
 		 * 
 		 * @param addr The memory address.

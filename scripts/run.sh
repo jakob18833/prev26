@@ -12,14 +12,14 @@ cd prg
 make clean >/dev/null
 
 echo "Compiling $1"
-compile_phase="imrlin"
+compile_phase="asmgen"
 log_phases="imrlin"
 document="$1.html"
 prg_name="$1"
 font_size="1.2"
 echo "" > $document
 
-make $prg_name TARGETPHASE=${compile_phase}
+make $prg_name TARGETPHASE=${compile_phase} LOGGEDPHASE=${log_phases}
 
 echo "<h2> ${prg_name} </h2>" >> $document
 echo "<pre style=\"font-size: ${font_size}em;\"><code>" >> $document

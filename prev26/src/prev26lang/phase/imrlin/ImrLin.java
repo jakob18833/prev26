@@ -36,8 +36,6 @@ public class ImrLin extends Phase {
         System.out.println("Depth: " + frame.depth);
         System.out.println();
         for (var stmt: canonicalTrees) System.out.println(stmt);
-        System.out.println("========================");
-        System.out.println();
         System.out.println();
     }
 

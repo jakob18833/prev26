@@ -3,6 +3,7 @@ package prev26lang;
 import prev26lang.common.report.Location;
 import prev26lang.common.report.Report;
 import prev26lang.phase.abstr.Abstr;
+import prev26lang.phase.asmgen.AsmGen;
 import prev26lang.phase.imrgen.ImrGen;
 import prev26lang.phase.imrgen.ImrGenerator;
 import prev26lang.phase.imrlin.ImrLin;
@@ -60,6 +61,7 @@ public class Compiler {
             "memory",
             "imrgen",
             "imrlin",
+            "asmgen",
             "all" // -----: putting it all together
     ));
 
@@ -198,17 +200,15 @@ public class Compiler {
                     LinVisitor linVisitor = new LinVisitor();
                     linVisitor.visit(Abstr.tree);
                     (new ImrLin.Logger(imrLin.xmlLogger)).visit(Abstr.tree);
-                    Vector<LIN.DataChunk> dataChunks = ImrLin.dataChunkAttr.values();
-                    Vector<LIN.CodeChunk> codeChunks = ImrLin.codeChunkAttr.values();
+//                    Vector<LIN.DataChunk> dataChunks = ImrLin.dataChunkAttr.values();
+//                    Vector<LIN.CodeChunk> codeChunks = ImrLin.codeChunkAttr.values();
 
-                    System.out.println("************************");
-                    System.out.println("Interpreted program:");
-                    Interpreter interpreter = new Interpreter(dataChunks, codeChunks, false);
-                    long value = interpreter.run("_main");
-                    System.out.println("Function _main returned " + value);
-                    System.out.println("************************");
+//                    Interpreter interpreter = new Interpreter(dataChunks, codeChunks, false);
+//                    long value = interpreter.run("_main");
                 }
-
+                // Assembly generation
+                AsmGen.generateASM();
+                if (cmdLineOpts.get("--target-phase").equals("asmgen")) break;
 
                 break;
             }

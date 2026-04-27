@@ -214,6 +214,10 @@ public class MEM {
 			this.name = "_" + name;
 		}
 
+		@Override
+		public String toString() {
+			return this.name;
+		}
 	}
 
 }

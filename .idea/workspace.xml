@@ -5,88 +5,196 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff2a0d1a-a209-4e09-9590-fd6324928869" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/asmgen/ASM.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/asmgen/AsmGen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/asmgen/AsmVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/63230046-imrgen.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/63230046-program2.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PR.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PR.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/lib/xsl/imrgen.xsl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/prg/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/Compiler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/logger/Loggable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/logger/XMLLogger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/logger/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/Locatable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/Location.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/Report.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/common/report/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/Phase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/imrgen/IMR.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/imrgen/ImrGen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/imrgen/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26-imrgen/prev26/src/prev26lang/phase/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/.claude/settings.local.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/Compiler.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/Compiler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/common/logger/XMLLogger.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/common/logger/XMLLogger.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Attribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Attribute.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/abstr/AST$Logger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/AddrVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/AddrVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ExprVisitor$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ExprVisitor$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ExprVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ExprVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$BINOP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$BINOP.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CALL.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CALL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CJUMP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CJUMP.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CONST.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$CONST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$ESTMT.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$ESTMT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$JUMP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$JUMP.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$LABEL.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$LABEL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MEM1.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MEM1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MEM8.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MEM8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MOVE.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$MOVE.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$NAME.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$NAME.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$SEXPR.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$SEXPR.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$STMTS.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$STMTS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$Stmt.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$Stmt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$TEMP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$TEMP.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$UNOP$Oper.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$UNOP$Oper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$UNOP.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$UNOP.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$Visitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/IMR$Visitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ImrGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrgen/ImrGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Layouter.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Layouter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$Label.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/MEM$Label.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Memory$Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/Memory$Logger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/SizeofType.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/memory/SizeofType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/seman/TypeChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/program4.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program4.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/program5.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program5.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/program6.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program6.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/program7.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program7.p26" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/prg/program8.p26" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/prg/program8.p26" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrlin/LinVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/bin/prev26lang/phase/imrlin/LinVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/all.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test1-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test10-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test11-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test12-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test13-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test13-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test13-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test13-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test13-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test13-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test2-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test3-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test4-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test5-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test6-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test7-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test8-synan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-abstr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-abstr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-imrgen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-imrgen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-imrlin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-imrlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-lexan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-lexan.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-memory.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-seman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-seman.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-synan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev26/prg/test9-synan.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/Compiler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/common/logger/XMLLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/common/logger/XMLLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/abstr/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/abstr/AST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/AddrVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/AddrVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ExprVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ExprVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/IMR.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/IMR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ImrGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrgen/ImrGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/ImrLin.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/ImrLin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/Interpreter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/LIN.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/LIN.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/LinVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/LinVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/Linearizator.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/imrlin/Linearizator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Layouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Layouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/MEM.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/MEM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/Memory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/SizeofType.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/memory/SizeofType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/prev26/src/prev26lang/phase/seman/TypeChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandbox/program.s" beforeDir="false" afterPath="$PROJECT_DIR$/sandbox/program.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/test.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/test.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,27 +220,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/jakob/Documents/Noordung/openGLFX&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ASM.executor": "Run",
+    "Application.Compiler.executor": "Run",
+    "Application.Test.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/jakob/Documents/Noordung/openGLFX",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/prev26/lib/xsl" />
@@ -157,6 +267,7 @@
       <workItem from="1776608093273" duration="22514000" />
       <workItem from="1776779117873" duration="2000" />
       <workItem from="1776938891940" duration="70000" />
+      <workItem from="1777307418878" duration="15086000" />
     </task>
     <servers />
   </component>

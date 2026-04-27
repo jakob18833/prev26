@@ -1802,7 +1802,7 @@ public class AST {
 		// are sometimes inserting duplicates. For example, we
 		// for every expression with OFTYPE=TYP.BoolType we override the
 		// previously stored one.
-        private final HashMap<Value, Node> reverseMap = new HashMap<>();
+        public final HashMap<Value, Node> reverseMap = new HashMap<>();
 
 		/** Checker for testing whether a node is a valid key. */
 		private final Predicate<Node> keyChecker;
@@ -1858,6 +1858,7 @@ public class AST {
         public Node reverseGet(Value value) {
             return reverseMap.get(value);
         }
+
 		public Vector<Value> values() {
 			return new Vector<>(reverseMap.keySet());
 		}

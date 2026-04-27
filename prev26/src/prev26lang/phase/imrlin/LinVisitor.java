@@ -23,7 +23,6 @@ public class LinVisitor implements AST.FullVisitor<Void, Void> {
                     MEM.Frame frame = Memory.frameAttr.get(defFunDefn);
 
                     Vector<IMR.Stmt> canonicalTrees = lin.linearize(stmt);
-                    ImrLin.logCanonicalTrees(canonicalTrees, frame, defFunDefn.name);
                     LIN.CodeChunk codeChunk = new LIN.CodeChunk(frame, canonicalTrees, entry, exit);
                     ImrLin.codeChunkAttr.put(defFunDefn, codeChunk);
                 } else if (defn instanceof AST.VarDefn varDefn) {
@@ -35,6 +34,8 @@ public class LinVisitor implements AST.FullVisitor<Void, Void> {
         }
         return AST.FullVisitor.super.visit(nodes, arg);
     }
+
+
 
     @Override
     public Void visit(AST.AtomExpr atomExpr, Void arg) {
